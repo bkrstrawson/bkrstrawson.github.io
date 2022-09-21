@@ -31,29 +31,27 @@ function draw(){
 }
 function keyPressed(){
   if (keyCode === 49){
-    banana--;
-    bananaPerSecond+=1;
-
+    if (banana >= 50){
+      banana-=50;
+      bananaPerSecond+=1;
+    }
   }
 }
 function drawBananaNumber(){
-  let s = banana;
-  rect(0,0,textWidth(s)+75,50);
+  rect(0,0,textWidth(banana)+75,50);
   stroke(0);
   fill(0);
   textSize(32);
-  text(s, 10, 30);
+  text(banana, 10, 30);
   fill("white"); 
-  image(imgBanana,(textWidth(s)+20),0,50,50);
+  image(imgBanana,(textWidth(banana)+20),0,50,50);
 }
 function randomBanana(){
-  let height = windowHeight;
+  
   let bananay=0;
-  let bananax = random(0,windowWidth);
-  while (height >=0 ){
-    height-=0.01;
-    image(imgBanana,bananax,bananay,30,30);
-    bananay+=0.01
-    
+  let bananax = random(0,windowWidth); 
+  for (let height = windowHeight; height >0; height-=0.01){
+    bananay +=0.01;
+    image(imgBanana,bananax, bananay,30,30);
   }
 }
