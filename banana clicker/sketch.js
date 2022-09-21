@@ -23,9 +23,10 @@ function setup() {
 function mouseClicked(){
   banana+=1;
   console.log(banana);
+  randomBanana();
 }
 function draw(){
-  image(imgBackGround, 0, 0, windowWidth, windowHeight);
+  //image(imgBackGround, 0, 0, windowWidth, windowHeight);
   drawBananaNumber();
 }
 function keyPressed(){
@@ -44,4 +45,15 @@ function drawBananaNumber(){
   text(s, 10, 30);
   fill("white"); 
   image(imgBanana,(textWidth(s)+20),0,50,50);
+}
+function randomBanana(){
+  let height = windowHeight;
+  let bananay=0;
+  let bananax = random(0,windowWidth);
+  while (height >=0 ){
+    height-=0.01;
+    image(imgBanana,bananax,bananay,30,30);
+    bananay+=0.01
+    
+  }
 }
