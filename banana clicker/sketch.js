@@ -17,10 +17,10 @@ let orangePerSecond =0;
 // let bananax = random(0,windowWidth); 
 function preload() {
   imgBackGround = loadImage("banana clicker background1.png");
-  imgBanana = loadImage("banana.png")
+  imgBanana = loadImage("banana.png");
 }
 function setup() {
-  frameRate(30)
+  frameRate(30);
   createCanvas(windowWidth,windowHeight);
   
 }
@@ -28,7 +28,7 @@ function setup() {
 function mouseClicked(){
   banana+=1;
   console.log(banana);
- // randomBanana();
+  // randomBanana();
    
 }
 function draw(){
@@ -44,35 +44,32 @@ function keyPressed(){//basic baboon gives 1 banana per second costs 50 banan
       bananaPerSecond+=1;
     }
   }
-}
-function keyPressed(){//basic mandril gives 5 banana per second costs 200 banan
-  if (keyCode === 50){
+  if (keyCode === 49){//basic orangutan gives 1 orange per 10 seconds costs 1000 banan
+    if (banana >= 50){
+      banana-=50;
+      bananaPerSecond+=1;
+    }
+  }
+  if (keyCode === 50){//basic mandril gives 5 banana per second costs 200 banan
     if (banana >= 200){
       banana-=200;
       bananaPerSecond+=5;
     }
   }
-  function keyPressed(){//more complex chimpanzee gives between 5 and 25 banana per second costs 500 banan
-    if (keyCode === 51){
-      if (banana >= 500){
-        banana-=500;
-        bananaPerSecond+=random(5,25);
-      }
+  if (keyCode === 51){//more complex chimpanzee gives between 5 and 25 banana per second costs 500 banan
+    if (banana >= 500){
+      banana-=500;
+      bananaPerSecond+=random(5,25);
     }
-    function keyPressed(){//basic gorilla gives 15 banana per second costs 500 banan
-      if (keyCode === 52){
-        if (banana >= 500){
-          banana-=500;
-          bananaPerSecond+=15;
-        }
-      }
-      function keyPressed(){//basic orangutan gives 1 orange per 10 seconds costs 1000 banan
-        if (keyCode === 49){
-          if (banana >= 50){
-            banana-=50;
-            bananaPerSecond+=1;
-          }
-        }
+  }
+  if (keyCode === 52){//basic gorilla gives 15 banana per second costs 500 banan
+    if (banana >= 500){
+      banana-=500;
+      bananaPerSecond+=15;
+    }
+  }
+}
+
 function drawBananaNumber(){
   rect(0,0,textWidth(banana)+75,50);
   stroke(0);
@@ -80,7 +77,7 @@ function drawBananaNumber(){
   textSize(32);
   text(banana, 10, 30);
   fill("white"); 
-  image(imgBanana,(textWidth(banana)+20),0,50,50);
+  image(imgBanana,textWidth(banana)+20,0,50,50);
 }
 // function randomBanana(){
   
@@ -92,10 +89,10 @@ function drawBananaNumber(){
 // }
 
 function perSecond(){
-  if (frameCount% 30 ==0){
+  if (frameCount% 30 ===0){
     banana +=bananaPerSecond;
   }
   if (frameCount%300 ===0){
-   orange += orangePerSecond;
+    orange += orangePerSecond;
   }
 }
