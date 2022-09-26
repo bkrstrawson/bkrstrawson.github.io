@@ -12,6 +12,7 @@ let banana = 0;
 let bananaPerSecond = 0;
 let orange = 0;
 let orangePerSecond =0;
+let array = [5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,2]
 // let x =0;
 // let y =0;
 // let bananax = random(0,windowWidth); 
@@ -37,35 +38,36 @@ function draw(){
   //moveNanner();
   perSecond();
 }
-function keyPressed(){//basic baboon gives 1 banana per second costs 50 banan
-  if (keyCode === 49){
-    if (banana >= 50){
-      banana-=50;
+function keyPressed(){//basic baboon gives 1 banana per second costs 25 banan
+  if (keyCode === 49){//1
+    if (banana >= 25){
+      banana-=25;
       bananaPerSecond+=1;
     }
   }
-  if (keyCode === 49){//basic orangutan gives 1 orange per 10 seconds costs 1000 banan
-    if (banana >= 50){
-      banana-=50;
-      bananaPerSecond+=1;
-    }
-  }
-  if (keyCode === 50){//basic mandril gives 5 banana per second costs 200 banan
-    if (banana >= 200){
-      banana-=200;
+
+  if (keyCode === 50){//basic mandril gives 5 banana per second costs 100 banan
+    if (banana >= 100){//2
+      banana-=100;
       bananaPerSecond+=5;
     }
   }
-  if (keyCode === 51){//more complex chimpanzee gives between 5 and 25 banana per second costs 500 banan
-    if (banana >= 500){
-      banana-=500;
-      bananaPerSecond+=random(5,25);
+  if (keyCode === 51){//more complex chimpanzee gives between 5 and 25 banana per second costs 250 banan
+    if (banana >= 250){//3
+      banana-=250;
+      bananaPerSecond+=random(array);
     }
   }
-  if (keyCode === 52){//basic gorilla gives 15 banana per second costs 500 banan
-    if (banana >= 500){
-      banana-=500;
+  if (keyCode === 52){//basic gorilla gives 15 banana per second costs 250 banan
+    if (banana >= 250){//4
+      banana-=250;
       bananaPerSecond+=15;
+    }
+  }
+  if (keyCode === 53){//basic orangutan gives 1 orange per 10 seconds costs 500 banan
+    if (banana >= 500){//5
+      banana-=50;
+      bananaPerSecond+=1;
     }
   }
 }
