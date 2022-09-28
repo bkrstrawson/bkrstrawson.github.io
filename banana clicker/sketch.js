@@ -35,38 +35,39 @@ function mouseClicked(){
 function draw(){
   image(imgBackGround, 0, 0, windowWidth, windowHeight);
   drawBananaNumber();
+  drawOrangeNumber();
   //moveNanner();
   perSecond();
 }
-function keyPressed(){//basic baboon gives 1 banana per second costs 25 banan
+function keyPressed(){//basic baboon gives 1 banana per second costs 50 banan
   if (keyCode === 49){//1
-    if (banana >= 25){
-      banana-=25;
+    if (banana >= 50){
+      banana-=50;
       bananaPerSecond+=1;
     }
   }
 
-  if (keyCode === 50){//basic mandril gives 5 banana per second costs 100 banan
-    if (banana >= 100){//2
-      banana-=100;
+  if (keyCode === 50){//basic mandril gives 5 banana per second costs 200 banan
+    if (banana >= 200){//2
+      banana-=200;
       bananaPerSecond+=5;
     }
   }
-  if (keyCode === 51){//more complex chimpanzee gives between 5 and 25 banana per second costs 250 banan
-    if (banana >= 250){//3
-      banana-=250;
+  if (keyCode === 51){//more complex chimpanzee gives between 5 and 25 banana per second costs 500 banan
+    if (banana >= 500){//3
+      banana-=500;
       bananaPerSecond+=random(array);
     }
   }
-  if (keyCode === 52){//basic gorilla gives 15 banana per second costs 250 banan
-    if (banana >= 250){//4
-      banana-=250;
+  if (keyCode === 52){//basic gorilla gives 15 banana per second costs 500 banan
+    if (banana >= 500){//4
+      banana-=500;
       bananaPerSecond+=15;
     }
   }
-  if (keyCode === 53){//basic orangutan gives 1 orange per 10 seconds costs 500 banan
-    if (banana >= 500){//5
-      banana-=50;
+  if (keyCode === 53){//basic orangutan gives 1 orange per 10 seconds costs 2000 banan
+    if (banana >= 2000){//5
+      banana-=2000;
       bananaPerSecond+=1;
     }
   }
@@ -77,7 +78,16 @@ function drawBananaNumber(){
   stroke(0);
   fill(0);
   textSize(32);
-  text(banana, 10, 30);
+  text(banana, 10, 35);
+  fill("white"); 
+  image(imgBanana,textWidth(banana)+20,0,50,50);
+}
+function drawOrangeNumber(){
+  rect(0,50,textWidth(orange)+75,50);
+  stroke(0);
+  fill(0);
+  textSize(32);
+  text(orange, 10,85);
   fill("white"); 
   image(imgBanana,textWidth(banana)+20,0,50,50);
 }
