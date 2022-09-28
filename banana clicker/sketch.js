@@ -8,17 +8,20 @@
 
 let imgBackGround;
 let imgBanana;
+let imgorange;
 let banana = 0;
 let bananaPerSecond = 0;
 let orange = 0;
 let orangePerSecond =0;
-let array = [5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,2]
+let array = [5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25];
+let sometime = 1000
 // let x =0;
 // let y =0;
 // let bananax = random(0,windowWidth); 
 function preload() {
   imgBackGround = loadImage("banana clicker background1.png");
   imgBanana = loadImage("banana.png");
+  imgorange = loadImage("orange.png");
 }
 function setup() {
   frameRate(30);
@@ -27,7 +30,7 @@ function setup() {
 }
 
 function mouseClicked(){
-  banana+=1;
+  banana+=1000000;
   console.log(banana);
   // randomBanana();
    
@@ -44,6 +47,7 @@ function keyPressed(){//basic baboon gives 1 banana per second costs 50 banan
     if (banana >= 50){
       banana-=50;
       bananaPerSecond+=1;
+      
     }
   }
 
@@ -68,28 +72,34 @@ function keyPressed(){//basic baboon gives 1 banana per second costs 50 banan
   if (keyCode === 53){//basic orangutan gives 1 orange per 10 seconds costs 2000 banan
     if (banana >= 2000){//5
       banana-=2000;
-      bananaPerSecond+=1;
+      orangePerSecond+=1;
     }
   }
 }
 
 function drawBananaNumber(){
-  rect(0,0,textWidth(banana)+75,50);
+  rect(0,0,textWidth(banana)+75,65);
   stroke(0);
   fill(0);
+  textSize(12);
+  text(bananaPerSecond+" per second ",10,55)
   textSize(32);
   text(banana, 10, 35);
   fill("white"); 
   image(imgBanana,textWidth(banana)+20,0,50,50);
 }
 function drawOrangeNumber(){
-  rect(0,50,textWidth(orange)+75,50);
-  stroke(0);
-  fill(0);
-  textSize(32);
-  text(orange, 10,85);
-  fill("white"); 
-  image(imgBanana,textWidth(banana)+20,0,50,50);
+  if (orange!= 0){
+    rect(0,65,textWidth(orange)+75,65);
+    stroke(0);
+    fill(0);
+    textSize(12);
+    text(orangePerSecond+" per second ",10,120)
+    textSize(32);
+    text(orange, 10,100);
+    fill("white"); 
+    image(imgorange,textWidth(orange)+20,65,50,50);
+  }
 }
 // function randomBanana(){
   
@@ -101,10 +111,10 @@ function drawOrangeNumber(){
 // }
 
 function perSecond(){
-  if (frameCount% 30 ===0){
+  if (millis() >=sometime){
     banana +=bananaPerSecond;
-  }
-  if (frameCount%300 ===0){
     orange += orangePerSecond;
+    sometime = millis() +1000;
+
   }
 }
