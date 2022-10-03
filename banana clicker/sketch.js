@@ -6,22 +6,27 @@
 // - describe what you did to take this project "above and beyond"
 
 
-let imgBackGround;
+let imgGameBackGround;
+let imgStartBackGround;
 let imgBanana;
 let imgorange;
+let imgTitleBananan;
 let banana = 0;
 let bananaPerSecond = 0;
 let orange = 0;
 let orangePerSecond =0;
 let array = [5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25];
-let sometime = 1000
+let sometime = 1000;
+let state = "start";
 // let x =0;
 // let y =0;
 // let bananax = random(0,windowWidth); 
 function preload() {
-  imgBackGround = loadImage("banana clicker background1.png");
+  imgGameBackGround = loadImage("banana clicker background1.png");
   imgBanana = loadImage("banana.png");
   imgorange = loadImage("orange.png");
+  imgTitleBananan = loadImage("banana font bananana.png")
+  imgStartBackGround =loadImage("banana background startscreen.jpg")
 }
 function setup() {
   frameRate(30);
@@ -36,11 +41,8 @@ function mouseClicked(){
    
 }
 function draw(){
-  image(imgBackGround, 0, 0, windowWidth, windowHeight);
-  drawBananaNumber();
-  drawOrangeNumber();
-  //moveNanner();
-  perSecond();
+  statScreen();
+  gameRunning();
 }
 function keyPressed(){//basic baboon gives 1 banana per second costs 50 banan
   if (keyCode === 49){//1
@@ -82,7 +84,7 @@ function drawBananaNumber(){
   stroke(0);
   fill(0);
   textSize(12);
-  text(bananaPerSecond+" per second ",10,55)
+  text(bananaPerSecond+" per second ",10,55);
   textSize(32);
   text(banana, 10, 35);
   fill("white"); 
@@ -94,7 +96,7 @@ function drawOrangeNumber(){
     stroke(0);
     fill(0);
     textSize(12);
-    text(orangePerSecond+" per second ",10,120)
+    text(orangePerSecond+" per second ",10,120);
     textSize(32);
     text(orange, 10,100);
     fill("white"); 
@@ -117,4 +119,21 @@ function perSecond(){
     sometime = millis() +1000;
 
   }
+}
+function gameRunning(){
+  if (state === "game"){
+    image(imgGameBackGround, 0, 0, windowWidth, windowHeight);
+    drawBananaNumber();
+    drawOrangeNumber();
+    //moveNanner();
+    perSecond();
+  }
+}
+function statScreen(){
+  drawStartstuff();
+}
+
+function drawStartstuff(){
+  image(imgStartBackGround, 0, 0, windowWidth, windowHeight);
+  image(imgTitleBananan,0,0,400,400);
 }
