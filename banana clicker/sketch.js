@@ -11,6 +11,7 @@ let imgStartBackGround;
 let imgBanana;
 let imgorange;
 let imgTitleBananan;
+let clickerFont;
 let banana = 0;
 let bananaPerSecond = 0;
 let orange = 0;
@@ -25,8 +26,9 @@ function preload() {
   imgGameBackGround = loadImage("banana clicker background1.png");
   imgBanana = loadImage("banana.png");
   imgorange = loadImage("orange.png");
-  imgTitleBananan = loadImage("banana font bananana.jpg")
-  imgStartBackGround =loadImage("banana background startscreen.jpg")
+  imgTitleBananan = loadImage("bananan font banana.png");
+  imgStartBackGround =loadImage("banana background startscreen.jpg");
+  clickerFont =loadFont("Minimal Performance.ttf");
 }
 function setup() {
   frameRate(30);
@@ -92,7 +94,7 @@ function drawBananaNumber(){
   image(imgBanana,textWidth(banana)+20,0,50,50);
 }
 function drawOrangeNumber(){
-  if (orange!= 0){
+  if (orange!== 0){
     rect(0,65,textWidth(orange)+75,65);
     stroke(0);
     fill(0);
@@ -123,7 +125,7 @@ function perSecond(){
 }
 function gameRunning(){
   if (state === "game"){
-    image(imgGameBackGround, 0, 0, windowWidth, windowHeight);
+    //image(imgGameBackGround, 0, 0, windowWidth, windowHeight);
     drawBananaNumber();
     drawOrangeNumber();
     //moveNanner();
@@ -132,9 +134,24 @@ function gameRunning(){
 }
 function statScreen(){
   drawStartstuff();
+  startButton();
 }
 
 function drawStartstuff(){
   image(imgStartBackGround, 0, 0, windowWidth, windowHeight);
-  image(imgTitleBananan,windowWidth/2-400,0,800,200);
+  fill("white");
+  rect(windowWidth/2-300,50,600,300,);
+  image(imgTitleBananan,windowWidth/2-750,-250,1500,800);
+  textFont(clickerFont);
+  textSize(45);
+  fill("black");
+  let x = textWidth("Clicker");
+  text("Clicker",windowWidth/2-x/2,250,500,300);
+}
+
+function startButton(){
+  if (mouseX > windowWidth/2-200 && mouseX < windowWidth/2+200 && mouseY > windowHeight-300 && mouseY < windowHeight-175){
+  fill("white")
+  rect(windowWidth/2-200,windowHeight-300,400,125);
+  }
 }
