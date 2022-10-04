@@ -25,7 +25,7 @@ function preload() {
   imgGameBackGround = loadImage("banana clicker background1.png");
   imgBanana = loadImage("banana.png");
   imgorange = loadImage("orange.png");
-  imgTitleBananan = loadImage("banana font bananana.png")
+  imgTitleBananan = loadImage("banana font bananana.jpg")
   imgStartBackGround =loadImage("banana background startscreen.jpg")
 }
 function setup() {
@@ -41,6 +41,7 @@ function mouseClicked(){
    
 }
 function draw(){
+  createCanvas(windowWidth,windowHeight);
   statScreen();
   gameRunning();
 }
@@ -135,5 +136,5 @@ function statScreen(){
 
 function drawStartstuff(){
   image(imgStartBackGround, 0, 0, windowWidth, windowHeight);
-  image(imgTitleBananan,0,0,400,400);
+  image(imgTitleBananan,windowWidth/2-400,0,800,200);
 }
