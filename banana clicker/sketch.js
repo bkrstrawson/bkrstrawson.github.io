@@ -6,6 +6,8 @@
 // - describe what you did to take this project "above and beyond"
 
 
+
+
 let imgGameBackGround;
 let imgStartBackGround;
 let imgBanana;
@@ -16,12 +18,17 @@ let banana = 0;
 let bananaPerSecond = 0;
 let orange = 0;
 let orangePerSecond =0;
-let array = [5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25];
+let chimp = [5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25];
 let sometime = 1000;
 let state = "start";
-// let x =0;
-// let y =0;
-// let bananax = random(0,windowWidth); 
+
+let bananaXArray =[];
+let bananaYArray = [];
+
+ let x =0;
+ let y =0;
+ let gameY = 0;
+ 
 function preload() {
   imgGameBackGround = loadImage("banana clicker background1.png");
   imgBanana = loadImage("banana.png");
@@ -32,20 +39,19 @@ function preload() {
 }
 function setup() {
   frameRate(30);
-  createCanvas(windowWidth,windowHeight);
-  
 }
 
-function mouseClicked(){
-  banana+=1000000;
+function mousePressed(){
+  banana+=1;
   console.log(banana);
-  // randomBanana();
+  randomBanana();
    
 }
 function draw(){
   createCanvas(windowWidth,windowHeight);
   statScreen();
   gameRunning();
+  console.log(banana);
 }
 function keyPressed(){//basic baboon gives 1 banana per second costs 50 banan
   if (keyCode === 49){//1
@@ -65,7 +71,7 @@ function keyPressed(){//basic baboon gives 1 banana per second costs 50 banan
   if (keyCode === 51){//more complex chimpanzee gives between 5 and 25 banana per second costs 500 banan
     if (banana >= 500){//3
       banana-=500;
-      bananaPerSecond+=random(array);
+      bananaPerSecond+=random(chimp);
     }
   }
   if (keyCode === 52){//basic gorilla gives 15 banana per second costs 500 banan
@@ -74,7 +80,7 @@ function keyPressed(){//basic baboon gives 1 banana per second costs 50 banan
       bananaPerSecond+=15;
     }
   }
-  if (keyCode === 53){//basic orangutan gives 1 orange per 10 seconds costs 2000 banan
+  if (keyCode === 53){//basic orangutan gives 1 orange per 1 seconds costs 2000 banan
     if (banana >= 2000){//5
       banana-=2000;
       orangePerSecond+=1;
@@ -86,7 +92,7 @@ function drawBananaNumber(){
   rect(0,0,textWidth(banana)+75,65);
   stroke(0);
   fill(0);
-  textSize(12);
+  textSize(8);
   text(bananaPerSecond+" per second ",10,55);
   textSize(32);
   text(banana, 10, 35);
@@ -98,7 +104,7 @@ function drawOrangeNumber(){
     rect(0,65,textWidth(orange)+75,65);
     stroke(0);
     fill(0);
-    textSize(12);
+    textSize(8);
     text(orangePerSecond+" per second ",10,120);
     textSize(32);
     text(orange, 10,100);
@@ -106,9 +112,9 @@ function drawOrangeNumber(){
     image(imgorange,textWidth(orange)+20,65,50,50);
   }
 }
-// function randomBanana(){
-  
-//   }
+ function randomBanana(){
+  Array.reverse()
+  }
 
 // function moveNanner(){
 //   image(imgBanana,bananax, y ,30,30);
@@ -125,7 +131,7 @@ function perSecond(){
 }
 function gameRunning(){
   if (state === "game"){
-    //image(imgGameBackGround, 0, 0, windowWidth, windowHeight);
+    image(imgGameBackGround, 0, 0, windowWidth, windowHeight);
     drawBananaNumber();
     drawOrangeNumber();
     //moveNanner();
@@ -133,8 +139,10 @@ function gameRunning(){
   }
 }
 function statScreen(){
-  drawStartstuff();
-  startButton();
+  if (state === "start"){
+    drawStartstuff();
+    startButton();
+  }
 }
 
 function drawStartstuff(){
@@ -151,7 +159,18 @@ function drawStartstuff(){
 
 function startButton(){
   if (mouseX > windowWidth/2-200 && mouseX < windowWidth/2+200 && mouseY > windowHeight-300 && mouseY < windowHeight-175){
-  fill("white")
-  rect(windowWidth/2-200,windowHeight-300,400,125);
+    fill("black");
+    rect(windowWidth/2-200,windowHeight-300,400,125);
+    fill("white");
+    text("Start",windowWidth/2-textWidth("start")/2,windowHeight-200);
+    if (mouseIsPressed){
+      state = "game";
+    }
+  }
+  else{
+    fill("white");
+    rect(windowWidth/2-200,windowHeight-300,400,125);
+    fill("black");
+    text("Start",windowWidth/2-textWidth("start")/2,windowHeight-200);
   }
 }
