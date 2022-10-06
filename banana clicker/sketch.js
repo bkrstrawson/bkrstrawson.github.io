@@ -42,8 +42,10 @@ function setup() {
 }
 
 function mousePressed(){
+  if (state==="game")
   banana+=1;
   console.log(banana);
+  
   randomBanana();
    
 }
@@ -51,7 +53,11 @@ function draw(){
   createCanvas(windowWidth,windowHeight);
   statScreen();
   gameRunning();
-  console.log(banana);
+  console.log(bananaXArray);
+  console.log(y-bananaYArray[1]> windowHeight);
+  console.log(windowHeight)
+  console.log (y-bananaYArray[1])
+
 }
 function keyPressed(){//basic baboon gives 1 banana per second costs 50 banan
   if (keyCode === 49){//1
@@ -112,14 +118,28 @@ function drawOrangeNumber(){
     image(imgorange,textWidth(orange)+20,65,50,50);
   }
 }
- function randomBanana(){
-  Array.reverse()
+ function moveNanner(){
+  y+=5
+   for (let i = bananaXArray.length; i > 0; i --){
+    let bananax = bananaXArray[i-1];
+    let bananay = y-bananaYArray[i-1];
+    image(imgBanana,bananax,bananay,50,50)
+    if (y-bananaYArray[i-1]> windowHeight){
+  //     bananaXArray.reverse()
+  //  bananaXArray = bananaXArray.pop()
+  //   bananaXArray.reverse()
+  bananaXArray=bananaXArray.slice(1)
+  bananaYArray=bananaYArray.slice(1)
+    }
+
+   }
+  //  
   }
 
-// function moveNanner(){
-//   image(imgBanana,bananax, y ,30,30);
-//   y++;
-// }
+ function randomBanana(){
+   bananaXArray.push(random(0,windowWidth))
+   bananaYArray.push(y-40)
+ }
 
 function perSecond(){
   if (millis() >=sometime){
@@ -134,7 +154,7 @@ function gameRunning(){
     image(imgGameBackGround, 0, 0, windowWidth, windowHeight);
     drawBananaNumber();
     drawOrangeNumber();
-    //moveNanner();
+    moveNanner();
     perSecond();
   }
 }
