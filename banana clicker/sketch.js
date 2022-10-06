@@ -1,6 +1,6 @@
-// Project Title
-// Your Name
-// Date
+// Banana Clicker
+// Ben Strawson
+// oct
 //
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
@@ -25,11 +25,11 @@ let state = "start";
 let bananaXArray =[];
 let bananaYArray = [];
 
- let x =0;
- let y =0;
- let gameY = 0;
+let x =0;
+let y =0;
+let gameY = 0;
  
-function preload() {
+function preload() {//loadinf images and fonts
   imgGameBackGround = loadImage("banana clicker background1.png");
   imgBanana = loadImage("banana.png");
   imgorange = loadImage("orange.png");
@@ -37,31 +37,25 @@ function preload() {
   imgStartBackGround =loadImage("banana background startscreen.jpg");
   clickerFont =loadFont("Minimal Performance.ttf");
 }
-function setup() {
+function setup() {//sets frame rate
   frameRate(30);
 }
 
-function mousePressed(){
-  if (state==="game")
-  banana+=1;
-  console.log(banana);
-  
-  randomBanana();
-   
+function mousePressed(){//when mouse pressed adds banana to count and starts the banana animation
+  if (state==="game") {
+    banana+=1;
+    randomBanana();
+  }
+
 }
 function draw(){
   createCanvas(windowWidth,windowHeight);
   statScreen();
   gameRunning();
-  console.log(bananaXArray);
-  console.log(y-bananaYArray[1]> windowHeight);
-  console.log(windowHeight)
-  console.log (y-bananaYArray[1])
-
 }
-function keyPressed(){//basic baboon gives 1 banana per second costs 50 banan
-  if (keyCode === 49){//1
-    if (banana >= 50){
+function keyPressed(){//if one of the shop kesy are pressed buys the monkey and increases banana per second
+  if (keyCode === 49){//basic baboon gives 1 banana per second costs 50 banan
+    if (banana >= 50){//1
       banana-=50;
       bananaPerSecond+=1;
       
@@ -94,7 +88,7 @@ function keyPressed(){//basic baboon gives 1 banana per second costs 50 banan
   }
 }
 
-function drawBananaNumber(){
+function drawBananaNumber(){//draws banana score
   rect(0,0,textWidth(banana)+75,65);
   stroke(0);
   fill(0);
@@ -105,7 +99,7 @@ function drawBananaNumber(){
   fill("white"); 
   image(imgBanana,textWidth(banana)+20,0,50,50);
 }
-function drawOrangeNumber(){
+function drawOrangeNumber(){//draws orange score
   if (orange!== 0){
     rect(0,65,textWidth(orange)+75,65);
     stroke(0);
@@ -118,30 +112,26 @@ function drawOrangeNumber(){
     image(imgorange,textWidth(orange)+20,65,50,50);
   }
 }
- function moveNanner(){
-  y+=5
-   for (let i = bananaXArray.length; i > 0; i --){
+function moveNanner(){//does the banana animation
+  y+=5;
+  for (let i = bananaXArray.length; i > 0; i --){
     let bananax = bananaXArray[i-1];
-    let bananay = y-bananaYArray[i-1];
-    image(imgBanana,bananax,bananay,50,50)
-    if (y-bananaYArray[i-1]> windowHeight){
-  //     bananaXArray.reverse()
-  //  bananaXArray = bananaXArray.pop()
-  //   bananaXArray.reverse()
-  bananaXArray=bananaXArray.slice(1)
-  bananaYArray=bananaYArray.slice(1)
+    let bananay = (y-bananaYArray[i-1])-100;
+    image(imgBanana,bananax,bananay,50,50);
+    if ((y-bananaYArray[i-1]-100)> windowHeight){
+      bananaXArray=bananaXArray.slice(1);
+      bananaYArray=bananaYArray.slice(1);
     }
 
-   }
-  //  
   }
+}
 
- function randomBanana(){
-   bananaXArray.push(random(0,windowWidth))
-   bananaYArray.push(y-40)
- }
+function randomBanana(){//makes a new banana at a random x to animate
+  bananaXArray.push(random(0,windowWidth));
+  bananaYArray.push(y-40);
+}
 
-function perSecond(){
+function perSecond(){//happens 1 time per second, increases banana and orange by how many per secod
   if (millis() >=sometime){
     banana +=bananaPerSecond;
     orange += orangePerSecond;
@@ -149,7 +139,7 @@ function perSecond(){
 
   }
 }
-function gameRunning(){
+function gameRunning(){//draw loop for when game is running
   if (state === "game"){
     image(imgGameBackGround, 0, 0, windowWidth, windowHeight);
     drawBananaNumber();
@@ -158,14 +148,14 @@ function gameRunning(){
     perSecond();
   }
 }
-function statScreen(){
+function statScreen(){//draw loop for when start screen
   if (state === "start"){
     drawStartstuff();
     startButton();
   }
 }
 
-function drawStartstuff(){
+function drawStartstuff(){//draws title
   image(imgStartBackGround, 0, 0, windowWidth, windowHeight);
   fill("white");
   rect(windowWidth/2-300,50,600,300,);
@@ -177,7 +167,7 @@ function drawStartstuff(){
   text("Clicker",windowWidth/2-x/2,250,500,300);
 }
 
-function startButton(){
+function startButton(){//draws start button and makes it clickable
   if (mouseX > windowWidth/2-200 && mouseX < windowWidth/2+200 && mouseY > windowHeight-300 && mouseY < windowHeight-175){
     fill("black");
     rect(windowWidth/2-200,windowHeight-300,400,125);
