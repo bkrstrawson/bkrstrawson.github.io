@@ -21,6 +21,8 @@ let orangePerSecond =0;
 let chimp = [5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25];
 let sometime = 1000;
 let state = "start";
+let banana1
+let orange1 
 
 let bananaXArray =[];
 let bananaYArray = [];
@@ -89,27 +91,29 @@ function keyPressed(){//if one of the shop kesy are pressed buys the monkey and 
 }
 
 function drawBananaNumber(){//draws banana score
-  rect(0,0,textWidth(banana)+75,65);
+  banana1 = round(banana)
+  rect(0,0,textWidth(banana1)+75,65);
   stroke(0);
   fill(0);
   textSize(8);
   text(bananaPerSecond+" per second ",10,55);
   textSize(32);
-  text(banana, 10, 35);
+  text(banana1, 10, 35);
   fill("white"); 
-  image(imgBanana,textWidth(banana)+20,0,50,50);
+  image(imgBanana,textWidth(banana1)+20,0,50,50);
 }
 function drawOrangeNumber(){//draws orange score
   if (orange!== 0){
-    rect(0,65,textWidth(orange)+75,65);
+    orange1 = round(orange)
+    rect(0,65,textWidth(orange1)+75,65);
     stroke(0);
     fill(0);
     textSize(8);
     text(orangePerSecond+" per second ",10,120);
     textSize(32);
-    text(orange, 10,100);
+    text(orange1, 10,100);
     fill("white"); 
-    image(imgorange,textWidth(orange)+20,65,50,50);
+    image(imgorange,textWidth(orange1)+20,65,50,50);
   }
 }
 function moveNanner(){//does the banana animation
@@ -133,10 +137,10 @@ function randomBanana(){//makes a new banana at a random x to animate
 
 function perSecond(){//happens 1 time per second, increases banana and orange by how many per secod
   if (millis() >=sometime){
-    banana +=bananaPerSecond;
-    orange += orangePerSecond;
-    sometime = millis() +1000;
-
+    banana +=bananaPerSecond/10;
+    orange += orangePerSecond/10;
+    sometime = millis() +100;
+    
   }
 }
 function gameRunning(){//draw loop for when game is running
