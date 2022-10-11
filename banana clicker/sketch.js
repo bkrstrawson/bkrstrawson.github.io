@@ -13,6 +13,12 @@ let imgStartBackGround;
 let imgBanana;
 let imgorange;
 let imgTitleBananan;
+let imgChimp;
+let imgBaboon;
+let imgMandrill;
+let imgOragutan;
+let imgGorilla;
+
 let clickerFont;
 let banana = 0;
 let bananaPerSecond = 0;
@@ -21,8 +27,8 @@ let orangePerSecond =0;
 let chimp = [5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25];
 let sometime = 1000;
 let state = "start";
-let banana1
-let orange1 
+let banana1;
+let orange1; 
 
 let bananaXArray =[];
 let bananaYArray = [];
@@ -31,12 +37,19 @@ let x =0;
 let y =0;
 let gameY = 0;
  
-function preload() {//loadinf images and fonts
-  imgGameBackGround = loadImage("banana clicker background1.png");
-  imgBanana = loadImage("banana.png");
-  imgorange = loadImage("orange.png");
-  imgTitleBananan = loadImage("bananan font banana.png");
-  imgStartBackGround =loadImage("banana background startscreen.jpg");
+function preload() {//loading images and fonts
+  imgGameBackGround = loadImage("imgs/banana clicker background1.png");
+  imgBanana = loadImage("imgs/banana.png");
+  imgorange = loadImage("imgs/orange.png");
+  imgTitleBananan = loadImage("imgs/bananan font banana.png");
+  imgStartBackGround =loadImage("imgs/banana background startscreen.jpg");
+
+  imgBaboon = loadImage("imgs/baboon.jpg");
+  imgChimp = loadImage("imgs/chimp.png");
+  imgMandrill = loadImage("imgs/mandrill.png");
+  imgGorilla = loadImage("imgs/gorilla.png");
+  imgOragutan = loadImage("imgs/orangutan.png");
+
   clickerFont =loadFont("Minimal Performance.ttf");
 }
 function setup() {//sets frame rate
@@ -52,8 +65,24 @@ function mousePressed(){//when mouse pressed adds banana to count and starts the
 }
 function draw(){
   createCanvas(windowWidth,windowHeight);
-  statScreen();
-  gameRunning();
+  if (windowWidth <= 600){
+    background("red");
+    textSize(25);
+    fill("black");
+    text("PlEASE USE A BIGGER SCREEN", 25, windowHeight/2,windowWidth,windowHeight);
+  }
+  else if (windowHeight <= 600){
+    background("red");
+    fill("black");
+    textSize(25);
+    text("PlEASE USE A BIGGER SCREEN",25, windowHeight/2,windowWidth,windowHeight);
+  }
+  else{
+    //  console.log(windowWidth)
+    //  console.log(windowHeight)
+    statScreen();
+    gameRunning();
+  }
 }
 function keyPressed(){//if one of the shop kesy are pressed buys the monkey and increases banana per second
   if (keyCode === 49){//basic baboon gives 1 banana per second costs 50 banan
@@ -91,7 +120,7 @@ function keyPressed(){//if one of the shop kesy are pressed buys the monkey and 
 }
 
 function drawBananaNumber(){//draws banana score
-  banana1 = round(banana)
+  banana1 = round(banana);
   rect(0,0,textWidth(banana1)+75,65);
   stroke(0);
   fill(0);
@@ -104,7 +133,7 @@ function drawBananaNumber(){//draws banana score
 }
 function drawOrangeNumber(){//draws orange score
   if (orange!== 0){
-    orange1 = round(orange)
+    orange1 = round(orange);
     rect(0,65,textWidth(orange1)+75,65);
     stroke(0);
     fill(0);
@@ -120,9 +149,9 @@ function moveNanner(){//does the banana animation
   y+=5;
   for (let i = bananaXArray.length; i > 0; i --){
     let bananax = bananaXArray[i-1];
-    let bananay = (y-bananaYArray[i-1])-100;
+    let bananay = y-bananaYArray[i-1]-100;
     image(imgBanana,bananax,bananay,50,50);
-    if ((y-bananaYArray[i-1]-100)> windowHeight){
+    if (y-bananaYArray[i-1]-100> windowHeight){
       bananaXArray=bananaXArray.slice(1);
       bananaYArray=bananaYArray.slice(1);
     }
@@ -150,6 +179,7 @@ function gameRunning(){//draw loop for when game is running
     drawOrangeNumber();
     moveNanner();
     perSecond();
+    drawMonkeys();
   }
 }
 function statScreen(){//draw loop for when start screen
@@ -187,4 +217,7 @@ function startButton(){//draws start button and makes it clickable
     fill("black");
     text("Start",windowWidth/2-textWidth("start")/2,windowHeight-200);
   }
+}
+function drawMonkeys(){
+
 }
