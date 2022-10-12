@@ -58,7 +58,7 @@ function setup() {//sets frame rate
 
 function mousePressed(){//when mouse pressed adds banana to count and starts the banana animation
   if (state==="game") {
-    banana+=1;
+    banana+=49;
     randomBanana();
   }
 
@@ -121,6 +121,7 @@ function keyPressed(){//if one of the shop kesy are pressed buys the monkey and 
 
 function drawBananaNumber(){//draws banana score
   banana1 = round(banana);
+  textSize(32);
   rect(0,0,textWidth(banana1)+75,65);
   stroke(0);
   fill(0);
@@ -219,5 +220,46 @@ function startButton(){//draws start button and makes it clickable
   }
 }
 function drawMonkeys(){
-
+  if (banana >= 50){
+    image(imgBaboon, windowWidth/6,windowHeight/5 *3  ,200,200);
+    if (mouseX >= windowWidth/6 && mouseX <=windowWidth/6 +200 && mouseY >=windowHeight/5 *3 && mouseY <=windowHeight/5 *3 + 200){
+      drawMonkeyInfomation("1","50","1","banana","baboon");
+    }
+  }
+  if (banana >= 200){
+    image (imgMandrill, windowWidth/5*2,windowHeight/7*4, 150,150);
+    if (mouseX >= windowWidth/5*2 && mouseX <=windowWidth/5*2 +150 && mouseY >=windowHeight/7 *4 && mouseY <=windowHeight/7 *4+150){
+      drawMonkeyInfomation("2","200","5","banana","mandrill");
+    }
+  }
+  if (banana >=500){
+    image (imgGorilla, windowWidth/7 * 3, windowHeight/3, 250,250);
+    if (mouseX >= windowWidth/7 *3 && mouseX <=windowWidth/7*3 +250 && mouseY >=windowHeight/3 && mouseY <=windowHeight/3 +200){
+      drawMonkeyInfomation("4","500","15","banana","gorilla");
+    }
+    image (imgChimp, windowWidth/7 * 6, windowHeight/9*6, 200,200);
+    if (mouseX >= windowWidth/7*6 && mouseX <=windowWidth/7*6 +200 && mouseY >=windowHeight/9 *6 && mouseY <=windowHeight/9 *6 +200){
+      drawMonkeyInfomation("3","500","5-25","banana",+"chimpanzee");
+    }
+  }
+  if (banana >= 2000){
+    image (imgOragutan,windowWidth/9*6,windowHeight/2,300,300);
+    if (mouseX >= windowWidth/9*6 && mouseX <=windowWidth/9*6 +300 && mouseY >=windowHeight/2 && mouseY <=windowHeight/2 +200){
+      drawMonkeyInfomation("5","2000","1","orange","orangutan");
+    }
+  }
+  
+  
+}
+function drawMonkeyInfomation(buyKey,cost,numberOfBanana,fruit,monkeyType){
+  fill("white");
+  rect(windowWidth/2 - 200, 0, 400,160);
+  textSize(18);
+  fill("black");
+  text("monkey information",windowWidth/2 - textWidth("monkey information")/2,30);
+  textSize(15);
+  text ( monkeyType, windowWidth/2 - textWidth( monkeyType)/2,60);
+  text("Buy key = " + buyKey,windowWidth/2 - textWidth("Buy key = ")/2,90);
+  text ("cost "+ cost + " bananas",windowWidth/2 - textWidth("cost "+ cost+ " bananas")/2,120);
+  text (numberOfBanana +" "+ fruit + "s per second" ,windowWidth/2 - textWidth(numberOfBanana + fruit + "s per second"/2),150);
 }
