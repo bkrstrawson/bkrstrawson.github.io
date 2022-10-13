@@ -58,7 +58,7 @@ function setup() {//sets frame rate
 
 function mousePressed(){//when mouse pressed adds banana to count and starts the banana animation
   if (state==="game") {
-    banana+=49;
+    banana+=1;
     randomBanana();
   }
 
@@ -178,9 +178,10 @@ function gameRunning(){//draw loop for when game is running
     image(imgGameBackGround, 0, 0, windowWidth, windowHeight);
     drawBananaNumber();
     drawOrangeNumber();
+    drawMonkeys();
     moveNanner();
     perSecond();
-    drawMonkeys();
+    
   }
 }
 function statScreen(){//draw loop for when start screen
