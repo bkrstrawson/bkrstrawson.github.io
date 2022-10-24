@@ -3,7 +3,7 @@
 // oct
 //
 // Extra for Experts:
-// - describe what you did to take this project "above and beyond"
+// used arrays to do the banana animation 
 
 
 
@@ -33,7 +33,6 @@ let orange1;
 let bananaXArray =[];
 let bananaYArray = [];
 
-let x =0;
 let y =0;
 let gameY = 0;
  
@@ -65,25 +64,11 @@ function mousePressed(){//when mouse pressed adds banana to count and starts the
 }
 function draw(){
   createCanvas(windowWidth,windowHeight);
-  if (windowWidth <= 600){
-    background("red");
-    textSize(25);
-    fill("black");
-    text("PlEASE USE A BIGGER SCREEN", 25, windowHeight/2,windowWidth,windowHeight);
-  }
-  else if (windowHeight <= 600){
-    background("red");
-    fill("black");
-    textSize(25);
-    text("PlEASE USE A BIGGER SCREEN",25, windowHeight/2,windowWidth,windowHeight);
-  }
-  else{
-    //  console.log(windowWidth)
-    //  console.log(windowHeight)
-    statScreen();
-    gameRunning();
-  }
+  statScreen();
+  gameRunning();
+  screenSizeCheck();
 }
+
 function keyPressed(){//if one of the shop kesy are pressed buys the monkey and increases banana per second
   if (keyCode === 49){//basic baboon gives 1 banana per second costs 50 banan
     if (banana >= 50){//1
@@ -220,7 +205,7 @@ function startButton(){//draws start button and makes it clickable
     text("Start",windowWidth/2-textWidth("start")/2,windowHeight-200);
   }
 }
-function drawMonkeys(){
+function drawMonkeys(){ //draws the monkeys when you can afford them and signals the monkey information when you hover over them
   if (banana >= 50){
     image(imgBaboon, windowWidth/6,windowHeight/5 *3  ,200,200);
     if (mouseX >= windowWidth/6 && mouseX <=windowWidth/6 +200 && mouseY >=windowHeight/5 *3 && mouseY <=windowHeight/5 *3 + 200){
@@ -252,7 +237,7 @@ function drawMonkeys(){
   
   
 }
-function drawMonkeyInfomation(buyKey,cost,numberOfBanana,fruit,monkeyType){
+function drawMonkeyInfomation(buyKey,cost,numberOfBanana,fruit,monkeyType){//draws monkey informatoion
   fill("white");
   rect(windowWidth/2 - 200, 0, 400,160);
   textSize(18);
@@ -263,4 +248,19 @@ function drawMonkeyInfomation(buyKey,cost,numberOfBanana,fruit,monkeyType){
   text("Buy key = " + buyKey,windowWidth/2 - textWidth("Buy key = ")/2,90);
   text ("cost "+ cost + " bananas",windowWidth/2 - textWidth("cost "+ cost+ " bananas")/2,120);
   text (numberOfBanana +" "+ fruit + "s per second" ,windowWidth/2 - textWidth(numberOfBanana + fruit + "s per second"/2),150);
+}
+
+function screenSizeCheck(){//checks to see if the screen size is too small
+  if (windowWidth <= 600){
+    background("red");
+    textSize(25);
+    fill("black");
+    text("PlEASE USE A BIGGER SCREEN", 25, windowHeight/2,windowWidth,windowHeight);
+  }
+  else if (windowHeight <= 600){
+    background("red");
+    fill("black");
+    textSize(25);
+    text("PlEASE USE A BIGGER SCREEN",25, windowHeight/2,windowWidth,windowHeight);
+  }
 }
