@@ -49,8 +49,8 @@ function moveCircle(){
     for (let k = 0; k <theCircles.length;k++ ){
       if (k !== i){
         if (iscollide(theCircles[i],theCircles[k])){
-          let tempX = theCircles[i].dx
-          let tempY = theCircles[i].dy
+          let tempX = theCircles[i].dx;
+          let tempY = theCircles[i].dy;
           theCircles[i].dy =  theCircles[k].dy;
           theCircles[i].dx =  theCircles[k].dx;
           theCircles[k].dy = tempY;
