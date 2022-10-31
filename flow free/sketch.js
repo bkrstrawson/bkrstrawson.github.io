@@ -97,6 +97,6 @@ function drawLines(){
     colorState = "red"
   }
   while(mouseIsPressed){
-
+    
   }
 }
