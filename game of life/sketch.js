@@ -7,6 +7,7 @@ const COLS = 40;
 let grid;
 let cellWidth;
 let cellHeight;
+let auto = false;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -18,11 +19,20 @@ function setup() {
 function draw() {
   background(220);
   displayGrid(grid);
+  if(auto){
+    grid = takeTurn(grid)
+  }
 }
 
 function keyPressed() {
   if (key === "e") {
     grid = create2dArray(COLS, ROWS);
+  }
+  if (key ===" ") {
+   grid = takeTurn(grid)
+  }
+  if (key === "a"){
+    auto = !auto
   }
 }
 
