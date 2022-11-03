@@ -130,9 +130,7 @@ function drawLines(){
       colorState = " "; 
     }
   }
-  //console.log(colorState);
-  console.log(xpos)
-   console.log(ypos)
+
   if(mouseIsPressed){
     
     if (xpos === xposPast +1 || xpos === xposPast -1 || ypos === yposPast +1 ||ypos ===yposPast -1){
@@ -190,8 +188,13 @@ function checkcollisons(){
   if (xpos === xposPast +1 || xpos === xposPast -1 || ypos === yposPast +1 ||ypos ===yposPast -1){
     if (grid[ypos][xpos]  !==0){
       if (grid[ypos][xpos] ==="r"||grid[ypos][xpos] ==="endr"){
-        //if (colorstate ==="r" && grid[yposPast][xposPast] ===
-        deleteLine("r");
+        if (colorState ==="r" && grid[yposPast][xposPast] === "endr" && grid[ypos][xpos] ==="r" ){
+          grid[yposPast][xposPast] = 0;
+          grid[ypos][xpos] ==="endr";
+        }
+        else{
+          deleteLine("r");
+        }
       }
       if (grid[ypos][xpos] ==="g" ||grid[ypos][xpos] ==="endg"){
         deleteLine("g");
@@ -208,7 +211,7 @@ function checkcollisons(){
 //&& grid[ypos][xpos]  !=="G" && grid[ypos][xpos]  !=="Y" && grid[ypos][xpos]  !=="R" && grid[ypos][xpos]  !=="B"){
 
 function deleteLine(cDel){
-  if(mouseIsPressed && (xposPast !==0 || yposPast !== 0)){
+  if(mouseIsPressed){// && (xposPast !==0 || yposPast !== 0)){
     if(cDel === "r"){
       rDone=false;
     }
@@ -240,6 +243,7 @@ function checkWin(){
 
 function mousePressed(){
   if (grid[ypos][xpos]==="G"){
+    console.log("178")
     deleteLine("g");
   }
   if (grid[ypos][xpos]==="R"){
