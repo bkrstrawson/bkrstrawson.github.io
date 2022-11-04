@@ -248,16 +248,16 @@ function deleteLine(cDel){
 
         }
         if (grid[y][x] === "G1"){
-          grid[y][x] = "G"
+          grid[y][x] = "G";
         }
         if (grid[y][x] === "Y1"){
-          grid[y][x] = "Y"
+          grid[y][x] = "Y";
         }
         if (grid[y][x] === "R1"){
-          grid[y][x] = "R"
+          grid[y][x] = "R";
         }
         if (grid[y][x] === "B1"){
-          grid[y][x] = "B"
+          grid[y][x] = "B";
         }
       }
     }
