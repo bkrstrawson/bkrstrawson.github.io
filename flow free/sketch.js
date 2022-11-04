@@ -17,16 +17,17 @@ let rDone = false;
 let bDone = false;
 let gDone = false;
 let yDone = false;
+let onScreen = false;
 
 
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   createGrid();
-  grid[0][0] = "G";
+  grid[0][0] = "R";
   grid[4][0] = "R";
-  grid[3][1] = "R";
-  grid[4][4] = "G";
+  grid[3][1] = "G";
+  grid[4][2] = "G";
   grid[1][4] = "Y";
   grid[0][3] = "Y";
   grid[4][3] = "B";
@@ -40,14 +41,22 @@ function draw() {
   drawCircles(grid);
   checkcollisons();
   drawLines();
+
+  if (onScreen){
+    changeLines();
+  }
   checkWin();
 }
+
 function drawStuff(){//just for uday
-  if (mouseX < width && mouseX>0){
+  if (Math.floor ((mouseX-width/4)/cellsize) <=4 && Math.floor ((mouseX-width/4)/cellsize) >=0 && (Math.floor (mouseY/cellsize) <=4 && Math.floor (mouseY/cellsize)>=0)){
     xpos = Math.floor ((mouseX-width/4)/cellsize); 
-  }
-  if (mouseY < height && mouseY>0){
     ypos = Math.floor (mouseY/cellsize);
+    onScreen = true;
+  }
+  else{
+    onScreen = false;
+    deleteLine(colorState);
   }
   cellsize = height/gridSize;
 }
@@ -76,19 +85,19 @@ function displayGrid(grid) {
 function drawCircles(grid){
   for (let y=0; y<gridSize; y++) {
     for (let x=0; x<gridSize; x++) {
-      if(grid[y][x] === "G"){
+      if(grid[y][x] === "G1"||grid[y][x] === "G"){
         fill ("green");
         circle(x*cellsize+ width/4 +cellsize/2,y*cellsize+cellsize/2,cellsize/2);
       }
-      if(grid[y][x] === "B"){
+      if(grid[y][x] === "B"||grid[y][x] === "B1"){
         fill ("blue");
         circle(x*cellsize+ width/4 +cellsize/2,y*cellsize+cellsize/2,cellsize/2);
       }
-      if(grid[y][x] === "R"){
+      if(grid[y][x] === "R"||grid[y][x] === "R1"){
         fill ("red");
         circle(x*cellsize+ width/4 +cellsize/2,y*cellsize+cellsize/2,cellsize/2);
       }
-      if(grid[y][x] === "Y"){
+      if(grid[y][x] === "Y"||grid[y][x] === "Y1"){
         fill ("yellow");
         circle(x*cellsize+ width/4 +cellsize/2,y*cellsize+cellsize/2,cellsize/2);
       }
@@ -114,28 +123,33 @@ function drawCircles(grid){
 
 function drawLines(){
   if (xpos >= 0 && xpos < gridSize && ypos >=0 && ypos < gridSize) {
-    if (grid[ypos][xpos]==="G" || grid[ypos][xpos]==="g" ){
-      colorState = "green";
+    if (grid[ypos][xpos]==="G" || grid[ypos][xpos]==="endg" ){
+      colorState = "g";
     }
-    else if (grid[ypos][xpos]==="B"|| grid[ypos][xpos]==="b"){
-      colorState = "blue";
+    else if (grid[ypos][xpos]==="B"|| grid[ypos][xpos]==="endb"){
+      colorState = "b";
     }
-    else if (grid[ypos][xpos]==="Y" || grid[ypos][xpos]==="y"){
-      colorState = "yellow";
+    else if (grid[ypos][xpos]==="Y" || grid[ypos][xpos]==="endy"){
+      colorState = "y";
     }
-    else if (grid[ypos][xpos]==="R"|| grid[ypos][xpos]==="r" ){
-      colorState = "red";
+    else if (grid[ypos][xpos]==="R"|| grid[ypos][xpos]==="endr" ){
+      colorState = "r";
     }
     else {
       colorState = " "; 
     }
   }
+}
 
+function changeLines(){
   if(mouseIsPressed){
     
     if (xpos === xposPast +1 || xpos === xposPast -1 || ypos === yposPast +1 ||ypos ===yposPast -1){
       if ((grid [yposPast][xposPast] === "endr" || grid [yposPast][xposPast] === "R") && (grid[ypos][xpos]===0 || grid[ypos][xpos]==="R")&&!rDone){
-        if (grid [yposPast][xposPast] !== "R") {
+        if (grid [yposPast][xposPast] === "R") {
+          grid [yposPast][xposPast] = "R1";
+        }
+        else{
           grid [yposPast][xposPast] = "r";
         }
         if (grid[ypos][xpos] === "R"){
@@ -146,8 +160,11 @@ function drawLines(){
         }
       }
       if ((grid [yposPast][xposPast] === "endb" || grid [yposPast][xposPast] === "B") && (grid[ypos][xpos]===0 || grid[ypos][xpos]==="B")&&!bDone){
-        if (grid [yposPast][xposPast] !== "B") {
-          grid [yposPast][xposPast] = "b";
+        if (grid [yposPast][xposPast] === "B") {
+          grid [yposPast][xposPast] = "B1";
+        }
+        else{
+          grid [yposPast][xposPast] ="b";
         }
         if (grid[ypos][xpos] === "B"){
           bDone = true;
@@ -157,7 +174,10 @@ function drawLines(){
         }
       }
       if ((grid [yposPast][xposPast] === "endy" || grid [yposPast][xposPast] === "Y") && (grid[ypos][xpos]===0 || grid[ypos][xpos]==="Y")&&!yDone){
-        if (grid [yposPast][xposPast] !== "Y") {
+        if (grid [yposPast][xposPast] === "Y") {
+          grid [yposPast][xposPast] = "Y1";
+        }
+        else{
           grid [yposPast][xposPast] = "y";
         }
         if (grid[ypos][xpos] === "Y"){
@@ -168,7 +188,10 @@ function drawLines(){
         }
       }
       if ((grid [yposPast][xposPast] === "endg" || grid [yposPast][xposPast] === "G") && (grid[ypos][xpos]===0 || grid[ypos][xpos]==="G")&& !gDone){
-        if (grid [yposPast][xposPast] !== "G") {
+        if (grid [yposPast][xposPast] === "G") {
+          grid [yposPast][xposPast] = "G1";
+        }
+        else{
           grid [yposPast][xposPast] = "g";
         }
         if (grid[ypos][xpos] === "G"){
@@ -187,14 +210,8 @@ function drawLines(){
 function checkcollisons(){
   if (xpos === xposPast +1 || xpos === xposPast -1 || ypos === yposPast +1 ||ypos ===yposPast -1){
     if (grid[ypos][xpos]  !==0){
-      if (grid[ypos][xpos] ==="r"||grid[ypos][xpos] ==="endr"){
-        if (colorState ==="r" && grid[yposPast][xposPast] === "endr" && grid[ypos][xpos] ==="r" ){
-          grid[yposPast][xposPast] = 0;
-          grid[ypos][xpos] ==="endr";
-        }
-        else{
-          deleteLine("r");
-        }
+      if (grid[ypos][xpos] ==="r"||grid[ypos][xpos] ==="endr"){       
+        deleteLine("r");
       }
       if (grid[ypos][xpos] ==="g" ||grid[ypos][xpos] ==="endg"){
         deleteLine("g");
@@ -211,7 +228,7 @@ function checkcollisons(){
 //&& grid[ypos][xpos]  !=="G" && grid[ypos][xpos]  !=="Y" && grid[ypos][xpos]  !=="R" && grid[ypos][xpos]  !=="B"){
 
 function deleteLine(cDel){
-  if(mouseIsPressed){// && (xposPast !==0 || yposPast !== 0)){
+  if(mouseIsPressed){
     if(cDel === "r"){
       rDone=false;
     }
@@ -230,6 +247,18 @@ function deleteLine(cDel){
           grid[y][x] =0; 
 
         }
+        if (grid[y][x] === "G1"){
+          grid[y][x] = "G"
+        }
+        if (grid[y][x] === "Y1"){
+          grid[y][x] = "Y"
+        }
+        if (grid[y][x] === "R1"){
+          grid[y][x] = "R"
+        }
+        if (grid[y][x] === "B1"){
+          grid[y][x] = "B"
+        }
       }
     }
   }
@@ -242,17 +271,16 @@ function checkWin(){
 }
 
 function mousePressed(){
-  if (grid[ypos][xpos]==="G"){
-    console.log("178")
+  if (grid[ypos][xpos]==="G" || grid[ypos][xpos]==="G1"){
     deleteLine("g");
   }
-  if (grid[ypos][xpos]==="R"){
+  if (grid[ypos][xpos]==="R"|| grid[ypos][xpos]==="R1"){
     deleteLine("r");
   }
-  if (grid[ypos][xpos]==="B"){
+  if (grid[ypos][xpos]==="B"|| grid[ypos][xpos]==="B1"){
     deleteLine("b");
   }
-  if (grid[ypos][xpos]==="Y"){
+  if (grid[ypos][xpos]==="Y"|| grid[ypos][xpos]==="Y1"){
     deleteLine("y");
   }
 }
