@@ -5,6 +5,8 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 
+let redwire;
+
 let grid = [];
 let gridSize = 5;
 let cellsize;
@@ -19,7 +21,9 @@ let gDone = false;
 let yDone = false;
 let onScreen = false;
 
-
+function preload(){
+  redwire = loadImage("redwire.png");
+}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -145,60 +149,68 @@ function changeLines(){
   if(mouseIsPressed){
     
     if (xpos === xposPast +1 || xpos === xposPast -1 || ypos === yposPast +1 ||ypos ===yposPast -1){
-      if ((grid [yposPast][xposPast] === "endr" || grid [yposPast][xposPast] === "R") && (grid[ypos][xpos]===0 || grid[ypos][xpos]==="R")&&!rDone){
-        if (grid [yposPast][xposPast] === "R") {
-          grid [yposPast][xposPast] = "R1";
-        }
-        else{
-          grid [yposPast][xposPast] = "r";
-        }
-        if (grid[ypos][xpos] === "R"){
-          rDone = true;
-        }
-        else {
-          grid[ypos][xpos] = "endr";
-        }
-      }
-      if ((grid [yposPast][xposPast] === "endb" || grid [yposPast][xposPast] === "B") && (grid[ypos][xpos]===0 || grid[ypos][xpos]==="B")&&!bDone){
-        if (grid [yposPast][xposPast] === "B") {
-          grid [yposPast][xposPast] = "B1";
-        }
-        else{
-          grid [yposPast][xposPast] ="b";
-        }
-        if (grid[ypos][xpos] === "B"){
-          bDone = true;
-        }
-        else {
-          grid[ypos][xpos] = "endb";
+      if ((grid [yposPast][xposPast] === "endr" || grid [yposPast][xposPast] === "R") && (grid[ypos][xpos]==="g" || grid[ypos][xpos]==="b" || grid[ypos][xpos]==="y" || grid[ypos][xpos]===0 || grid[ypos][xpos]==="R")&&!rDone){
+        if (grid [yposPast][xposPast] !== "R1"){
+          if (grid [yposPast][xposPast] === "R") {
+            grid [yposPast][xposPast] = "R1";
+          }
+          else{
+            grid [yposPast][xposPast] = "r";
+          }
+          if (grid[ypos][xpos] === "R"){
+            rDone = true;
+          }
+          else {
+            grid[ypos][xpos] = "endr";
+          }
         }
       }
-      if ((grid [yposPast][xposPast] === "endy" || grid [yposPast][xposPast] === "Y") && (grid[ypos][xpos]===0 || grid[ypos][xpos]==="Y")&&!yDone){
-        if (grid [yposPast][xposPast] === "Y") {
-          grid [yposPast][xposPast] = "Y1";
-        }
-        else{
-          grid [yposPast][xposPast] = "y";
-        }
-        if (grid[ypos][xpos] === "Y"){
-          yDone = true;
-        }
-        else {
-          grid[ypos][xpos] = "endy";
+      if ((grid [yposPast][xposPast] === "endb" || grid [yposPast][xposPast] === "B") && (grid[ypos][xpos]===0 || grid[ypos][xpos]==="g" || grid[ypos][xpos]==="r" || grid[ypos][xpos]==="y" || grid[ypos][xpos]==="B")&&!bDone){
+        if (grid [yposPast][xposPast] !== "B1"){
+          if (grid [yposPast][xposPast] === "B") {
+            grid [yposPast][xposPast] = "B1";
+          }
+          else{
+            grid [yposPast][xposPast] ="b";
+          }
+          if (grid[ypos][xpos] === "B"){
+            bDone = true;
+          }
+          else {
+            grid[ypos][xpos] = "endb";
+          }
         }
       }
-      if ((grid [yposPast][xposPast] === "endg" || grid [yposPast][xposPast] === "G") && (grid[ypos][xpos]===0 || grid[ypos][xpos]==="G")&& !gDone){
-        if (grid [yposPast][xposPast] === "G") {
-          grid [yposPast][xposPast] = "G1";
+      if ((grid [yposPast][xposPast] === "endy" || grid [yposPast][xposPast] === "Y") && (grid[ypos][xpos]===0 || grid[ypos][xpos]==="g" || grid[ypos][xpos]==="b" || grid[ypos][xpos]==="r" || grid[ypos][xpos]==="Y")&&!yDone){
+        if (grid [yposPast][xposPast] !== "Y1"){
+          if (grid [yposPast][xposPast] === "Y") {
+            grid [yposPast][xposPast] = "Y1";
+          }
+          else{
+            grid [yposPast][xposPast] = "y";
+          }
+          if (grid[ypos][xpos] === "Y"){
+            yDone = true;
+          }
+          else {
+            grid[ypos][xpos] = "endy";
+          }
         }
-        else{
-          grid [yposPast][xposPast] = "g";
-        }
-        if (grid[ypos][xpos] === "G"){
-          gDone = true;
-        }
-        else {
-          grid[ypos][xpos] = "endg";
+      }
+      if ((grid [yposPast][xposPast] === "endg" || grid [yposPast][xposPast] === "G") && (grid[ypos][xpos]===0 || grid[ypos][xpos]==="r" || grid[ypos][xpos]==="b" || grid[ypos][xpos]==="y" || grid[ypos][xpos]==="G")&& !gDone){
+        if (grid [yposPast][xposPast] !== "G1"){
+          if (grid [yposPast][xposPast] === "G") {
+            grid [yposPast][xposPast] = "G1";
+          }
+          else{
+            grid [yposPast][xposPast] = "g";
+          }
+          if (grid[ypos][xpos] === "G"){
+            gDone = true;
+          }
+          else {
+            grid[ypos][xpos] = "endg";
+          }
         }
       }
     }
@@ -210,16 +222,16 @@ function changeLines(){
 function checkcollisons(){
   if (xpos === xposPast +1 || xpos === xposPast -1 || ypos === yposPast +1 ||ypos ===yposPast -1){
     if (grid[ypos][xpos]  !==0){
-      if (grid[ypos][xpos] ==="r"||grid[ypos][xpos] ==="endr"){       
+      if (grid[ypos][xpos] ==="r"|| grid[ypos][xpos] ==="endr"){    
         deleteLine("r");
       }
-      if (grid[ypos][xpos] ==="g" ||grid[ypos][xpos] ==="endg"){
+      if (grid[ypos][xpos] ==="g" || grid[ypos][xpos] ==="endg"){
         deleteLine("g");
       }
-      if (grid[ypos][xpos] ==="y"||grid[ypos][xpos] ==="endy"){
+      if (grid[ypos][xpos] ==="y"|| grid[ypos][xpos] ==="endy"){
         deleteLine("y");
       }
-      if (grid[ypos][xpos] ==="b"||grid[ypos][xpos] ==="endb"){
+      if (grid[ypos][xpos] ==="b"|| grid[ypos][xpos] ==="endb"){
         deleteLine("b");
       }
     }
