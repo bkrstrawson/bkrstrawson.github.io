@@ -28,14 +28,14 @@ function preload(){
 function setup() {
   createCanvas(windowWidth, windowHeight);
   createGrid();
-  grid[0][0] = "R";
+  grid[0][4] = "R";
   grid[4][0] = "R";
-  grid[3][1] = "G";
-  grid[4][2] = "G";
-  grid[1][4] = "Y";
-  grid[0][3] = "Y";
-  grid[4][3] = "B";
-  grid[2][3] = "B";
+  grid[4][3] = "G";
+  grid[2][3] = "G";
+  grid[4][4] = "Y";
+  grid[3][2] = "Y";
+  grid[1][1] = "B";
+  grid[2][4] = "B";
 }
 
 function draw() {
@@ -50,6 +50,7 @@ function draw() {
     changeLines();
   }
   checkWin();
+
 }
 
 function drawStuff(){//just for uday
@@ -148,7 +149,7 @@ function drawLines(){
 function changeLines(){
   if(mouseIsPressed){
     
-    if (xpos === xposPast +1 || xpos === xposPast -1 || ypos === yposPast +1 ||ypos ===yposPast -1){
+    if ((xpos === xposPast +1 || xpos === xposPast -1) && ypos === yposPast || (ypos === yposPast +1 || ypos ===yposPast -1) && xpos === xposPast ){
       if ((grid [yposPast][xposPast] === "endr" || grid [yposPast][xposPast] === "R") && (grid[ypos][xpos]==="g" || grid[ypos][xpos]==="b" || grid[ypos][xpos]==="y" || grid[ypos][xpos]===0 || grid[ypos][xpos]==="R")&&!rDone){
         if (grid [yposPast][xposPast] !== "R1"){
           if (grid [yposPast][xposPast] === "R") {
@@ -215,6 +216,10 @@ function changeLines(){
       }
     }
   }
+
+
+  
+
   xposPast = xpos;
   yposPast = ypos;
 }
