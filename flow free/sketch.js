@@ -20,9 +20,13 @@ let bDone = false;
 let gDone = false;
 let yDone = false;
 let onScreen = false;
+let index;
+let level;
+let levels;
+let levelname;
 
 function preload(){
-  redwire = loadImage("redwire.png");
+  levels = loadStrings("levels/txt.txt")
 }
 
 function setup() {
@@ -40,11 +44,14 @@ function setup() {
 
 function draw() {
   background(220);
+  
   drawStuff();
   displayGrid(grid);
   drawCircles(grid);
   checkcollisons();
   drawLines();
+  connectLines();
+  
 
   if (onScreen){
     changeLines();
@@ -300,4 +307,24 @@ function mousePressed(){
   if (grid[ypos][xpos]==="Y"|| grid[ypos][xpos]==="Y1"){
     deleteLine("y");
   }
+}
+
+function connectLines(){
+  fill("black");
+  for (let y=0; y < gridSize; y++) {
+    for (let x=0; x < gridSize; x++) {
+      if (grid[y][x] !== 0){
+        if(x !==0){
+          if (grid[y][x] === grid[y][x-1] || grid[y][x-1] === "end" + grid[y][x] ||  grid[y][x] === "end" +grid[y][x-1]){//} || grid[y][x].toLowerCase()=== grid[y][x-1].toLowerCase()) {
+            rect(x*cellsize + width/4  ,y*cellsize + cellsize/3 ,cellsize/2 , cellsize/3);
+          }
+        }
+      }
+    }
+  }
+}
+
+function doLevels(name){
+  index = level.indexOf(name);
+  levelname = 
 }
