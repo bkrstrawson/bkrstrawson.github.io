@@ -24,7 +24,8 @@ let index;
 let level;
 let levels;
 let levelname;
-let gameState = "title";
+let gameState = 0;
+let pastgameState = 0;
 
 function preload(){
   levels = loadStrings("levels/level");
@@ -34,27 +35,27 @@ function preload(){
 function setup() {
   createCanvas(windowWidth, windowHeight);
   createGrid();
-  grid[0][4] = "R";
-  grid[4][0] = "R";
-  grid[4][3] = "G";
-  grid[2][3] = "G";
-  grid[4][4] = "Y";
-  grid[3][2] = "Y";
-  grid[1][1] = "B";
-  grid[2][4] = "B";
+  grid[1][3] = "R";
+  grid[4][3] = "R";
+  grid[1][2] = "G";
+  grid[3][2] = "G";
+  grid[1][1] = "Y";
+  grid[4][2] = "Y";
+  grid[4][0] = "B";
+  grid[4][4] = "B";
 }
 
 function draw() {
 
   
 
-  if (gameState !== "title"){
+  if (gameState !== 0){
     drawStuff();
     displayGrid(grid);
     drawCircles(grid);
     checkcollisons();
     drawLines();
-    connectLines();
+    //connectLines();
   
 
     if (onScreen){
@@ -107,8 +108,14 @@ function startButton(){//draws start button and makes it clickable
     fill("white");
     text("Start",windowWidth/2-textWidth("start")/2,windowHeight-200);
     if (mouseIsPressed){
-      gameState = "level1";
+      gameState = "startlevel1";
     }
+  }
+  else{
+    fill("white");
+    rect(windowWidth/2-200,windowHeight-300,400,125);
+    fill("black");
+    text("Start",windowWidth/2-textWidth("start")/2,windowHeight-200);
   }
 }
 
@@ -317,7 +324,7 @@ function deleteLine(cDel){
 
 function checkWin(){
   if (rDone && bDone && gDone && yDone){
-    console.log("you win");
+    gameState = "startlevel";
   }
 }
 
@@ -356,4 +363,13 @@ function doLevels(name){
   levelname = levels[index];
   level = loadJSON("levels/" + levelname +".json");
   grid = level;
+}
+
+function changeLevel(){
+  if (gameState !== pastgameState){
+    let lvl = str(gameState);
+    doLevels(lvl);
+    gameState ++; 
+  }
+  pastgameState = gameState;
 }
