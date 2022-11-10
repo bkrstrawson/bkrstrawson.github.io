@@ -24,9 +24,11 @@ let index;
 let level;
 let levels;
 let levelname;
+let gameState = "title";
 
 function preload(){
-  levels = loadStrings("levels/txt.txt")
+  levels = loadStrings("levels/level");
+
 }
 
 function setup() {
@@ -43,21 +45,26 @@ function setup() {
 }
 
 function draw() {
-  background(220);
-  
-  drawStuff();
-  displayGrid(grid);
-  drawCircles(grid);
-  checkcollisons();
-  drawLines();
-  connectLines();
+
   
 
-  if (onScreen){
-    changeLines();
+  if (gameState !== "title"){
+    drawStuff();
+    displayGrid(grid);
+    drawCircles(grid);
+    checkcollisons();
+    drawLines();
+    connectLines();
+  
+
+    if (onScreen){
+      changeLines();
+    }
+    checkWin();
   }
-  checkWin();
-
+  else {
+    drawTitle();
+  }
 }
 
 function drawStuff(){//just for uday
@@ -82,7 +89,15 @@ function createGrid(){
   }
 }
 
-
+function drawTitle(){
+  background(220);
+  fill ("white");
+  rect(windowWidth/2-300,50,600,300,);
+  textSize(45);
+  fill("black");
+  let x = textWidth("Flow Free");
+  text("Flow Free",windowWidth/2-x/2,250,500,300);
+}
 
 function displayGrid(grid) {
   for (let y=0; y<gridSize; y++) {
@@ -249,7 +264,6 @@ function checkcollisons(){
     }
   }
 }
-//&& grid[ypos][xpos]  !=="G" && grid[ypos][xpos]  !=="Y" && grid[ypos][xpos]  !=="R" && grid[ypos][xpos]  !=="B"){
 
 function deleteLine(cDel){
   if(mouseIsPressed){
@@ -325,6 +339,8 @@ function connectLines(){
 }
 
 function doLevels(name){
-  index = level.indexOf(name);
-  levelname = 
+  index = levels.indexOf(name);
+  levelname = levels[index];
+  level = loadJSON("levels/" + levelname +".json");
+  grid = level;
 }
