@@ -64,6 +64,7 @@ function draw() {
   }
   else {
     drawTitle();
+    startButton();
   }
 }
 
@@ -97,6 +98,18 @@ function drawTitle(){
   fill("black");
   let x = textWidth("Flow Free");
   text("Flow Free",windowWidth/2-x/2,250,500,300);
+}
+
+function startButton(){//draws start button and makes it clickable
+  if (mouseX > windowWidth/2-200 && mouseX < windowWidth/2+200 && mouseY > windowHeight-300 && mouseY < windowHeight-175){
+    fill("black");
+    rect(windowWidth/2-200,windowHeight-300,400,125);
+    fill("white");
+    text("Start",windowWidth/2-textWidth("start")/2,windowHeight-200);
+    if (mouseIsPressed){
+      gameState = "level1";
+    }
+  }
 }
 
 function displayGrid(grid) {
