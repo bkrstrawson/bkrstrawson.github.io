@@ -8,7 +8,7 @@
 
 
 let grid = [];
-let lineGrid = []
+let lineGrid = [];
 let gridSize = 5;
 let cellsize;
 let colorState = " ";
@@ -20,7 +20,7 @@ let rDone = false;
 let bDone = false;
 let gDone = false;
 let yDone = false;
-let allDone = false
+let allDone = false;
 let onScreen = false;
 let index;
 let level;
@@ -28,17 +28,17 @@ let levelname;
 let levels;
 let gameState = 0;
 let pastgameState = 0;
-let liner = 10
-let lineg = 10
-let lineb = 10
-let liney = 10
+let liner = 10;
+let lineg = 10;
+let lineb = 10;
+let liney = 10;
 let title;
 let endscreen;
 
 function preload(){
   levels = loadStrings("levels/level");
-title = loadImage("title.jpg")
-endscreen = loadImage("end screen.jpg")
+  title = loadImage("title.jpg");
+  endscreen = loadImage("end screen.jpg");
 }
 
 function setup() {
@@ -47,29 +47,29 @@ function setup() {
 }
 
 function draw() {
-  console.log(gameState)
-if (gameState !== 7){
-  drawStuff();
-  if (gameState !== 0){  
-    displayGrid(grid);
-    noStroke()
-    drawCircles(grid);
-    checkcollisons();
-    drawLines();
-    connectLines();
+  console.log(gameState);
+  if (gameState !== 7){
+    drawStuff();
+    if (gameState !== 0){  
+      displayGrid(grid);
+      noStroke();
+      drawCircles(grid);
+      checkcollisons();
+      drawLines();
+      connectLines();
 
-    if (onScreen){
-      changeLines();
+      if (onScreen){
+        changeLines();
+      }
+      checkWin();
     }
-    checkWin();
-  }
-  else {
-    drawTitle();
-    startButton();
-  }
+    else {
+      drawTitle();
+      startButton();
+    }
   
-  changeLevel()
-}
+    changeLevel();
+  }
 }
 
 function drawStuff(){//just the stuff that nees to happen in the draw loop and doesnt fit anywhere else(only to clean up thye draw loop because uday said it was gross)
@@ -96,13 +96,13 @@ function createGrid(){//creates an empty grid for line grid when there is a new 
 }
 
 function drawTitle(){//draws title image
-image(title,width/4,0,height,height)
+  image(title,width/4,0,height,height);
 }
 
 function startButton(){//draws start button and makes it clickable
-  textSize(50)
+  textSize(50);
   if (mouseX > windowWidth/2-200 && mouseX < windowWidth/2+200 && mouseY > windowHeight-300 && mouseY < windowHeight-175){
-    stroke(255)
+    stroke(255);
     fill("black");
     rect(windowWidth/2-200,windowHeight-300,400,125);
     fill("white");
@@ -120,7 +120,7 @@ function startButton(){//draws start button and makes it clickable
 }
 
 function displayGrid(grid) {//displays the empty grid
-  stroke(255)
+  stroke(255);
   for (let y=0; y<gridSize; y++) {
     for (let x=0; x<gridSize; x++) {
       fill("black");
@@ -196,21 +196,21 @@ function changeLines(){//when moved to a new cell it changes that cell to the co
         if (grid [yposPast][xposPast] !== "R1"){
           if (grid [yposPast][xposPast] === "R") {
             grid [yposPast][xposPast] = "R1";
-            lineGrid[yposPast][xposPast] = "r"+ liner
-            liner ++
+            lineGrid[yposPast][xposPast] = "r"+ liner;
+            liner ++;
           }
           else{
             grid [yposPast][xposPast] = "r";
           }
           if (grid[ypos][xpos] === "R"){
-            lineGrid[ypos][xpos] = "r"+ liner
-            liner ++
+            lineGrid[ypos][xpos] = "r"+ liner;
+            liner ++;
             rDone = true;
           }
           else {
             grid[ypos][xpos] = "endr";
-            lineGrid[ypos][xpos] = "r"+ liner
-            liner ++
+            lineGrid[ypos][xpos] = "r"+ liner;
+            liner ++;
           }
         }
       }
@@ -218,21 +218,21 @@ function changeLines(){//when moved to a new cell it changes that cell to the co
         if (grid [yposPast][xposPast] !== "B1"){
           if (grid [yposPast][xposPast] === "B") {
             grid [yposPast][xposPast] = "B1";
-            lineGrid[yposPast][xposPast] = "b"+ lineb
-            lineb ++
+            lineGrid[yposPast][xposPast] = "b"+ lineb;
+            lineb ++;
           }
           else{
             grid [yposPast][xposPast] ="b";
           }
           if (grid[ypos][xpos] === "B"){
-            lineGrid[ypos][xpos] = "b"+ lineb
-            lineb ++
+            lineGrid[ypos][xpos] = "b"+ lineb;
+            lineb ++;
             bDone = true;
           }
           else {
             grid[ypos][xpos] = "endb";
-            lineGrid[ypos][xpos] = "b"+ lineb
-            lineb ++
+            lineGrid[ypos][xpos] = "b"+ lineb;
+            lineb ++;
           }
         }
       }
@@ -240,21 +240,21 @@ function changeLines(){//when moved to a new cell it changes that cell to the co
         if (grid [yposPast][xposPast] !== "Y1"){
           if (grid [yposPast][xposPast] === "Y") {
             grid [yposPast][xposPast] = "Y1";
-            lineGrid[yposPast][xposPast] = "y"+ liney
-            liney ++
+            lineGrid[yposPast][xposPast] = "y"+ liney;
+            liney ++;
           }
           else{
             grid [yposPast][xposPast] = "y";
           }
           if (grid[ypos][xpos] === "Y"){
-            lineGrid[ypos][xpos] = "y"+ liney
-            liney ++
+            lineGrid[ypos][xpos] = "y"+ liney;
+            liney ++;
             yDone = true;
           }
           else {
             grid[ypos][xpos] = "endy";
-            lineGrid[ypos][xpos] = "y"+ liney
-            liney ++
+            lineGrid[ypos][xpos] = "y"+ liney;
+            liney ++;
           }
         }
       }
@@ -262,21 +262,21 @@ function changeLines(){//when moved to a new cell it changes that cell to the co
         if (grid [yposPast][xposPast] !== "G1"){
           if (grid [yposPast][xposPast] === "G") {
             grid [yposPast][xposPast] = "G1";
-            lineGrid[yposPast][xposPast] = "g"+ lineg
-            lineg ++
+            lineGrid[yposPast][xposPast] = "g"+ lineg;
+            lineg ++;
           }
           else{
             grid [yposPast][xposPast] = "g";
           }
           if (grid[ypos][xpos] === "G"){
-            lineGrid[ypos][xpos] = "g"+ lineg
-            lineg ++
+            lineGrid[ypos][xpos] = "g"+ lineg;
+            lineg ++;
             gDone = true;
           }
           else {
             grid[ypos][xpos] = "endg";
-            lineGrid[ypos][xpos] = "g"+ lineg
-            lineg ++
+            lineGrid[ypos][xpos] = "g"+ lineg;
+            lineg ++;
           }
         }
       }
@@ -309,19 +309,19 @@ function deleteLine(cDel){//deletes a line
   if(mouseIsPressed){
     if(cDel === "r"){
       rDone=false;
-      liner = 10
+      liner = 10;
     }
     if(cDel === "y"){
       yDone=false;
-      liney = 10
+      liney = 10;
     }
     if(cDel === "b"){
       bDone=false;
-      lineb = 10
+      lineb = 10;
     }
     if(cDel === "g"){
       gDone=false;
-      lineg = 10
+      lineg = 10;
     }
     for (let y=0; y<gridSize; y++) {
       for (let x=0; x<gridSize; x++) {
@@ -342,7 +342,7 @@ function deleteLine(cDel){//deletes a line
           grid[y][x] = "B";
         }
         if (lineGrid[y][x][0] ===cDel){
-          lineGrid[y][x] = 0
+          lineGrid[y][x] = 0;
         }
       }
     }
@@ -351,28 +351,28 @@ function deleteLine(cDel){//deletes a line
 
 function checkWin(){//checks to see if all the lines are completed
   if (rDone && bDone && gDone && yDone){
-    allDone = true 
-    fill(255,255,255,200   )
-    rect(width/4,0,height,height)
+    allDone = true; 
+    fill(255,255,255,200   );
+    rect(width/4,0,height,height);
     nextButton();
   }
 }
 
 function mousePressed(){//prompts line delets if clicked on circle of that color
   if (!allDone){
-  if (grid[ypos][xpos]==="G" || grid[ypos][xpos]==="G1"){
-    deleteLine("g");
+    if (grid[ypos][xpos]==="G" || grid[ypos][xpos]==="G1"){
+      deleteLine("g");
+    }
+    if (grid[ypos][xpos]==="R"|| grid[ypos][xpos]==="R1"){
+      deleteLine("r");
+    }
+    if (grid[ypos][xpos]==="B"|| grid[ypos][xpos]==="B1"){
+      deleteLine("b");
+    }
+    if (grid[ypos][xpos]==="Y"|| grid[ypos][xpos]==="Y1"){
+      deleteLine("y");
+    }
   }
-  if (grid[ypos][xpos]==="R"|| grid[ypos][xpos]==="R1"){
-    deleteLine("r");
-  }
-  if (grid[ypos][xpos]==="B"|| grid[ypos][xpos]==="B1"){
-    deleteLine("b");
-  }
-  if (grid[ypos][xpos]==="Y"|| grid[ypos][xpos]==="Y1"){
-    deleteLine("y");
-  }
-}
 }
 
 function doLevels(name){//uday sandhu code that i borrowed i am very thankful  // uses level.txt as an index for the levels and then sets grid to equal a saved grid with the base level
@@ -385,15 +385,15 @@ function doLevels(name){//uday sandhu code that i borrowed i am very thankful  /
 function changeLevel(){// prompts the level change or the end screen
   if (gameState !== pastgameState){
     if (gameState === 7){
-      displayEndScreen()
+      displayEndScreen();
     }
     else{
-    let lvl = str(gameState);
-    doLevels(lvl); 
-    lineGrid = []
-    createGrid()
+      let lvl = str(gameState);
+      doLevels(lvl); 
+      lineGrid = [];
+      createGrid();
+    }
   }
-}
   pastgameState = gameState;
 }
 
@@ -404,16 +404,16 @@ function nextButton(){//draws next button and makes it clickable
     fill("white");
     text("Next Level",windowWidth/2-textWidth("Next Level")/2,windowHeight-200);
     if (mouseIsPressed){
-      gameState ++ 
+      gameState ++; 
       rDone = false;
       gDone = false;
       bDone = false;
       yDone = false;
-      allDone = false
+      allDone = false;
     }
   }
   else{
-    stroke(51)
+    stroke(51);
     fill("white");
     rect(windowWidth/2-200,windowHeight-300,400,125);
     fill("black");
@@ -426,51 +426,51 @@ function connectLines(){//draws the rectangles that connect the dots to make the
   for (let y=0; y < gridSize; y++) {
     for (let x=0; x < gridSize; x++) {
       if (lineGrid[y][x] !== 0){
-        noStroke()
+        noStroke();
         if (lineGrid[y][x][0] === "r"){
-          fill("red")
+          fill("red");
         }
         if (lineGrid[y][x][0] === "b"){
-          fill("blue")
+          fill("blue");
         }
         if (lineGrid[y][x][0] === "y"){
-          fill("yellow")
+          fill("yellow");
         }
         if (lineGrid[y][x][0] === "g"){
-          fill("green")
+          fill("green");
         }
         if(x !==0){
           if (lineGrid[y][x][0] === lineGrid[y][x-1][0]){
-          if (int(lineGrid[y][x-1].substring(1)) === int(lineGrid[y][x].substring(1))-1 || int(lineGrid[y][x-1].substring(1)) === int(lineGrid[y][x].substring(1))+1){
-            rect(x*cellsize + width/4  ,y*cellsize + cellsize/3 ,cellsize/2 , cellsize/3);
+            if (int(lineGrid[y][x-1].substring(1)) === int(lineGrid[y][x].substring(1))-1 || int(lineGrid[y][x-1].substring(1)) === int(lineGrid[y][x].substring(1))+1){
+              rect(x*cellsize + width/4  ,y*cellsize + cellsize/3 ,cellsize/2 , cellsize/3);
+            }
           }
-        }
         }
         if(x !==4){
           if (lineGrid[y][x][0] === lineGrid[y][x+1][0]){
-          if (int(lineGrid[y][x+1].substring(1)) === int(lineGrid[y][x].substring(1))-1 || int(lineGrid[y][x+1].substring(1)) === int(lineGrid[y][x].substring(1))+1){
-            rect(x*cellsize + width/4 + cellsize/2 ,y*cellsize + cellsize/3 ,cellsize/2 , cellsize/3);
+            if (int(lineGrid[y][x+1].substring(1)) === int(lineGrid[y][x].substring(1))-1 || int(lineGrid[y][x+1].substring(1)) === int(lineGrid[y][x].substring(1))+1){
+              rect(x*cellsize + width/4 + cellsize/2 ,y*cellsize + cellsize/3 ,cellsize/2 , cellsize/3);
+            }
           }
-        }
         }
         if(y !==0){
           if (lineGrid[y][x][0] === lineGrid[y-1][x][0]){
-          if (int(lineGrid[y-1][x].substring(1)) === int(lineGrid[y][x].substring(1))-1 || int(lineGrid[y-1][x].substring(1)) === int(lineGrid[y][x].substring(1))+1){
-            rect(x*cellsize + width/4 + cellsize/3 ,y*cellsize  ,cellsize/3 , cellsize/2);
+            if (int(lineGrid[y-1][x].substring(1)) === int(lineGrid[y][x].substring(1))-1 || int(lineGrid[y-1][x].substring(1)) === int(lineGrid[y][x].substring(1))+1){
+              rect(x*cellsize + width/4 + cellsize/3 ,y*cellsize  ,cellsize/3 , cellsize/2);
+            }
           }
-        }
         }
         if(y !==4){
           if (lineGrid[y][x][0] === lineGrid[y+1][x][0]){
-          if (int(lineGrid[y+1][x].substring(1)) === int(lineGrid[y][x].substring(1))-1 || int(lineGrid[y+1][x].substring(1)) === int(lineGrid[y][x].substring(1))+1){
-            rect(x*cellsize + width/4 + cellsize/3  ,y*cellsize + cellsize/2 ,cellsize/3 , cellsize/2);
+            if (int(lineGrid[y+1][x].substring(1)) === int(lineGrid[y][x].substring(1))-1 || int(lineGrid[y+1][x].substring(1)) === int(lineGrid[y][x].substring(1))+1){
+              rect(x*cellsize + width/4 + cellsize/3  ,y*cellsize + cellsize/2 ,cellsize/3 , cellsize/2);
+            }
           }
         }
-        }
-      }
       }
     }
   }
+}
 function displayEndScreen(){//displays end screen image
- image(endscreen,width/4,0,height,height)
+  image(endscreen,width/4,0,height,height);
 }
