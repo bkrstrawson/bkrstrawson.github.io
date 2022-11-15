@@ -1,9 +1,10 @@
-// flow
-// bes
-// Date
+// flow free
+// ben strawson
+// nov 14 2022
 //
 // Extra for Experts:
-// - describe what you did to take this project "above and beyond"
+// figuring out how to connect the lines using a seperate array
+// and doing a project you said no one has completed before 
 
 
 
@@ -35,7 +36,7 @@ let liney = 10;
 let title;
 let endscreen;
 
-function preload(){
+function preload(){//preloads things
   levels = loadStrings("levels/level");
   title = loadImage("title.jpg");
   endscreen = loadImage("end screen.jpg");
@@ -47,34 +48,34 @@ function setup() {
 }
 
 function draw() {
-  console.log(gameState);
-  if (gameState !== 7){
-    drawStuff();
-    if (gameState !== 0){  
-      displayGrid(grid);
-      noStroke();
-      drawCircles(grid);
-      checkcollisons();
-      drawLines();
-      connectLines();
+  console.log(gameState)
+if (gameState !== 7){
+  drawStuff();
+  if (gameState !== 0){  //0 is the title screen game state so if runs the game if the gamestate isnt the tite
+    displayGrid(grid);
+    noStroke()
+    drawCircles(grid);
+    checkcollisons();
+    drawLines();
+    connectLines();
 
-      if (onScreen){
-        changeLines();
-      }
-      checkWin();
+    if (onScreen){//checks to see if mouse is on screen
+      changeLines();
     }
-    else {
-      drawTitle();
-      startButton();
-    }
+    checkWin();
+  }
+  else {//draws title stuff when game state is 0
+    drawTitle();
+    startButton();
+  }
   
     changeLevel();
   }
 }
 
-function drawStuff(){//just the stuff that nees to happen in the draw loop and doesnt fit anywhere else(only to clean up thye draw loop because uday said it was gross)
-  if (Math.floor ((mouseX-width/4)/cellsize) <=4 && Math.floor ((mouseX-width/4)/cellsize) >=0 && (Math.floor (mouseY/cellsize) <=4 && Math.floor (mouseY/cellsize)>=0)){
-    xpos = Math.floor ((mouseX-width/4)/cellsize); 
+function drawStuff(){//just the stuff that nees to happen in the draw loop and doesnt fit anywhere else(only to clean up the draw loop because uday said it was gross)
+  if (Math.floor ((mouseX-width/4)/cellsize) <=4 && Math.floor ((mouseX-width/4)/cellsize) >=0 && (Math.floor (mouseY/cellsize) <=4 && Math.floor (mouseY/cellsize)>=0)){//checks to see if mouse is on screen
+    xpos = Math.floor ((mouseX-width/4)/cellsize); //then sets the xpos and ypos only if mouse is on screen
     ypos = Math.floor (mouseY/cellsize);
     onScreen = true;
   }
@@ -85,7 +86,7 @@ function drawStuff(){//just the stuff that nees to happen in the draw loop and d
   cellsize = height/gridSize;
 }
 
-function createGrid(){//creates an empty grid for line grid when there is a new level
+function createGrid(){//creates an empty 2d array for line grid when there is a new level
   for (let i = 0; i < gridSize; i ++){
     lineGrid.push([]);
     for (let k = 0; k < gridSize; k ++){
@@ -133,7 +134,7 @@ function displayGrid(grid) {//displays the empty grid
 function drawCircles(grid){//looks at each spot in the grid and draws either the big circle or the little circle of the color
   for (let y=0; y<gridSize; y++) {
     for (let x=0; x<gridSize; x++) {
-      if(grid[y][x] === "G1"||grid[y][x] === "G"){
+      if(grid[y][x] === "G1"||grid[y][x] === "G"){// large circlees 
         fill ("green");
         circle(x*cellsize+ width/4 +cellsize/2,y*cellsize+cellsize/2,cellsize/2);
       }
@@ -149,7 +150,7 @@ function drawCircles(grid){//looks at each spot in the grid and draws either the
         fill ("yellow");
         circle(x*cellsize+ width/4 +cellsize/2,y*cellsize+cellsize/2,cellsize/2);
       }
-      if(grid[y][x] === "g"|| grid[y][x] === "endg"){
+      if(grid[y][x] === "g"|| grid[y][x] === "endg"){// small circles 
         fill ("green");
         circle(x*cellsize+ width/4 +cellsize/2,y*cellsize+cellsize/2,cellsize/3);
       }
@@ -191,26 +192,28 @@ function drawLines(){//changes colorstate based on what color your hovering on
 
 function changeLines(){//when moved to a new cell it changes that cell to the correct color only if the previous cell is the end of the line
   if(mouseIsPressed){
-    if ((xpos === xposPast +1 || xpos === xposPast -1) && ypos === yposPast || (ypos === yposPast +1 || ypos ===yposPast -1) && xpos === xposPast ){
-      if ((grid [yposPast][xposPast] === "endr" || grid [yposPast][xposPast] === "R") && (grid[ypos][xpos]==="g" || grid[ypos][xpos]==="b" || grid[ypos][xpos]==="y" || grid[ypos][xpos]===0 || grid[ypos][xpos]==="R")&&!rDone){
+    if ((xpos === xposPast +1 || xpos === xposPast -1) && ypos === yposPast || (ypos === yposPast +1 || ypos ===yposPast -1) && xpos === xposPast ){//checks to see if mosue has been moved by one cell in every direction
+      if ((grid [yposPast][xposPast] === "endr" || grid [yposPast][xposPast] === "R") && (grid[ypos][xpos]==="g" || grid[ypos][xpos]==="b" || grid[ypos][xpos]==="y" || grid[ypos][xpos]===0 || grid[ypos][xpos]==="R")&&!rDone){//checks to see what the new grid space is
         if (grid [yposPast][xposPast] !== "R1"){
           if (grid [yposPast][xposPast] === "R") {
-            grid [yposPast][xposPast] = "R1";
-            lineGrid[yposPast][xposPast] = "r"+ liner;
-            liner ++;
+
+            grid [yposPast][xposPast] = "R1";//chages the circle to a new string to keep track of what ciurcle you started with
+            lineGrid[yposPast][xposPast] = "r"+ liner//adds the line to the linegrid array which keeps track of the order for the lines
+            liner ++
+
           }
           else{
-            grid [yposPast][xposPast] = "r";
+            grid [yposPast][xposPast] = "r";//sets grid space to be small cicle 
           }
-          if (grid[ypos][xpos] === "R"){
-            lineGrid[ypos][xpos] = "r"+ liner;
-            liner ++;
+          if (grid[ypos][xpos] === "R"){//checks to see if at the final circle
+            lineGrid[ypos][xpos] = "r"+ liner
+            liner ++
             rDone = true;
           }
           else {
-            grid[ypos][xpos] = "endr";
-            lineGrid[ypos][xpos] = "r"+ liner;
-            liner ++;
+            grid[ypos][xpos] = "endr";//makes it so the end circle can exend the line
+            lineGrid[ypos][xpos] = "r"+ liner
+            liner ++
           }
         }
       }
@@ -287,9 +290,9 @@ function changeLines(){//when moved to a new cell it changes that cell to the co
 }
 
 function checkcollisons(){//checks to see if the lines collide and prompts the line to be deleted
-  if (xpos === xposPast +1 || xpos === xposPast -1 || ypos === yposPast +1 ||ypos ===yposPast -1){
+  if (xpos === xposPast +1 || xpos === xposPast -1 || ypos === yposPast +1 ||ypos ===yposPast -1){//checks to see if moved by one cell
     if (grid[ypos][xpos]  !==0){
-      if (grid[ypos][xpos] ==="r"|| grid[ypos][xpos] ==="endr"){    
+      if (grid[ypos][xpos] ==="r"|| grid[ypos][xpos] ==="endr"){   //deletes a color line if that new cell already has a line in it 
         deleteLine("r");
       }
       if (grid[ypos][xpos] ==="g" || grid[ypos][xpos] ==="endg"){
@@ -307,7 +310,7 @@ function checkcollisons(){//checks to see if the lines collide and prompts the l
 
 function deleteLine(cDel){//deletes a line
   if(mouseIsPressed){
-    if(cDel === "r"){
+    if(cDel === "r"){//makes it so deleted line isnt completed and resest the line counter
       rDone=false;
       liner = 10;
     }
@@ -325,7 +328,7 @@ function deleteLine(cDel){//deletes a line
     }
     for (let y=0; y<gridSize; y++) {
       for (let x=0; x<gridSize; x++) {
-        if (grid[y][x] === cDel || grid[y][x] === "end" + cDel){
+        if (grid[y][x] === cDel || grid[y][x] === "end" + cDel){//resets main display array and changes all large circles back to defualt 
           grid[y][x] =0; 
 
         }
@@ -341,8 +344,8 @@ function deleteLine(cDel){//deletes a line
         if (grid[y][x] === "B1"){
           grid[y][x] = "B";
         }
-        if (lineGrid[y][x][0] ===cDel){
-          lineGrid[y][x] = 0;
+        if (lineGrid[y][x][0] ===cDel){// resets the line array
+          lineGrid[y][x] = 0
         }
       }
     }
@@ -403,8 +406,8 @@ function nextButton(){//draws next button and makes it clickable
     rect(windowWidth/2-200,windowHeight-300,400,125);
     fill("white");
     text("Next Level",windowWidth/2-textWidth("Next Level")/2,windowHeight-200);
-    if (mouseIsPressed){
-      gameState ++; 
+    if (mouseIsPressed){//changes the game state to the next level and sets all lines to be in complete
+      gameState ++ 
       rDone = false;
       gDone = false;
       bDone = false;
@@ -426,9 +429,9 @@ function connectLines(){//draws the rectangles that connect the dots to make the
   for (let y=0; y < gridSize; y++) {
     for (let x=0; x < gridSize; x++) {
       if (lineGrid[y][x] !== 0){
-        noStroke();
-        if (lineGrid[y][x][0] === "r"){
-          fill("red");
+        noStroke()
+        if (lineGrid[y][x][0] === "r"){//sets the color of the line
+          fill("red")
         }
         if (lineGrid[y][x][0] === "b"){
           fill("blue");
@@ -440,10 +443,9 @@ function connectLines(){//draws the rectangles that connect the dots to make the
           fill("green");
         }
         if(x !==0){
-          if (lineGrid[y][x][0] === lineGrid[y][x-1][0]){
-            if (int(lineGrid[y][x-1].substring(1)) === int(lineGrid[y][x].substring(1))-1 || int(lineGrid[y][x-1].substring(1)) === int(lineGrid[y][x].substring(1))+1){
-              rect(x*cellsize + width/4  ,y*cellsize + cellsize/3 ,cellsize/2 , cellsize/3);
-            }
+          if (lineGrid[y][x][0] === lineGrid[y][x-1][0]){//checks to see if the spaces around it have the next line number and if it does draws a rectangle to that cell
+          if (int(lineGrid[y][x-1].substring(1)) === int(lineGrid[y][x].substring(1))-1 || int(lineGrid[y][x-1].substring(1)) === int(lineGrid[y][x].substring(1))+1){
+            rect(x*cellsize + width/4  ,y*cellsize + cellsize/3 ,cellsize/2 , cellsize/3);
           }
         }
         if(x !==4){
