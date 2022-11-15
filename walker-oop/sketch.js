@@ -10,8 +10,8 @@ class Walker{
     this.x = x;
     this.y = y;
     this.color = "red";
-    this.speed = 10; 
-    this.rad = 10;
+    this.speed = 5; 
+    this.rad = 5;
   }
 
   display(){
@@ -23,59 +23,63 @@ class Walker{
   move(){
     
     let choice = random(100);
-    if (choice < 25){
-      this.y-= this.speed;
+    if (choice < 25){ //up
+      if (this.y-this.speed >= 0){
+        this.y-= this.speed;
+      }
     }
   
-    else if (choice < 50){
-      this.y+= this.speed;
+    else if (choice < 50){ // down
+      if(this.y+this.speed <= height){
+        this.y+= this.speed;
+      }
     }
     else if (choice < 75 ){
-      this.x-= this.speed;
+      if (this.x-this.speed >= 0){
+        this.x-= this.speed;
+      }
     }
     else if (choice < 100  ){
-      this.x+= this.speed;
+      if (this.x+this.speed <= width){
+        this.x+= this.speed;
+      }
     }
 
+  }
 }
-}
 
 
 
-let uday;
-let saabir;
-let ashley;
-let ben;
-let lila
+let walkerAr= [];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   background(220);
-  uday = new Walker(width/2,height/2);
-  saabir = new Walker(width/2,height/2);
-  ashley = new Walker(width/2,height/2);
-  ben =  new Walker(width/2,height/2);
-  lila =  new Walker(width/2,height/2);
-  ben. color = "purple";
-  ashley.color = "green";
-  saabir.color = "blue";
-  lila.color = "orange"
+  spawnWalker();
 }
 
 function draw() {
 
-  uday.display();
-  saabir.display();
-  ashley.display();
-  ben.display();
-  lila.display()
+  for (let i = 0; i < walkerAr.length; i ++) {
+    walkerAr[i].move();
+    walkerAr[i].display();
+  }
+}
 
-  uday.move();
-  saabir.move();
-  ashley.move();
-  ben.move();
-  lila.move()
+function spawnWalker(){
+  let uday = new Walker(width/2,height/2);
 
-
-
+  let saabir = new Walker(width/2,height/2);
+  let ashley = new Walker(width/2,height/2);
+  let ben =  new Walker(width/2,height/2);
+  let lila =  new Walker(width/2,height/2);
+  ben. color = "purple";
+  ashley.color = "green";
+  saabir.color = "blue";
+  lila.color = "orange";
+  walkerAr.push(uday);
+  walkerAr.push(ashley);
+  walkerAr.push(lila);
+  walkerAr.push(ben);
+  walkerAr.push(saabir);
 }
