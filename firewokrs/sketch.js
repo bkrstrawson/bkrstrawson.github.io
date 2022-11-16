@@ -31,6 +31,9 @@ class particle{
     stroke(this.color);
     circle(this.x,this.y,this.rad);
   }
+  isDead(){
+    return this.alpha <= 0
+  }
 }
 
 function setup() {
@@ -39,11 +42,11 @@ function setup() {
 
 function draw() {
   background(0);
-  for(let i = 0; i<fireworksAR.length; i++){
+  for(let i = fireworksAR.length-1; i>=0; i--){
     fireworksAR[i].update();
     fireworksAR[i].display();
-    if(fireworksAR[i].alpha <= 0){
-      fireworksAR.
+    if (fireworksAR[i].isDead()){
+      fireworksAR.splice(i, 1)
     }
   }
 }
@@ -54,9 +57,9 @@ function mousePressed(){
   let green = random(255);
   for(let i = 0; i<100; i++){
     let someparticle = new particle(mouseX,mouseY);
-    someparticle.r = red
-    someparticle.g = green
-    someparticle.b = blue
+    someparticle.r = red;
+    someparticle.g = green;
+    someparticle.b = blue;
     fireworksAR.push(someparticle);
   }
 }
