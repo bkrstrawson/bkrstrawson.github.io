@@ -9,7 +9,7 @@ class Walker{
   constructor(x,y){
     this.x = x;
     this.y = y;
-    this.color = color(255,0,0,5);
+    this.color = color(255,0,0,50);
     this.speed = 5; 
     this.rad = 5;
   }
@@ -73,13 +73,16 @@ function spawnWalker(){
   let ashley = new Walker(width/2,height/2);
   let ben =  new Walker(width/2,height/2);
   let lila =  new Walker(width/2,height/2);
+  let saalar = new Walker(width/2,height/2);
   ben. color = color(128,0,128,50);
   ashley.color = color(0,100,0,50);
   saabir.color = color(0,0,255,50);
   lila.color = color(255,127,0,50);
+  saalar.color = color(255,192,203,50)
   walkerAr.push(uday);
   walkerAr.push(ashley);
   walkerAr.push(lila);
   walkerAr.push(ben);
   walkerAr.push(saabir);
+  walkerAr.push(saalar)
 }
