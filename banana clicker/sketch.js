@@ -5,9 +5,6 @@
 // Extra for Experts:
 // used arrays to do the banana animation 
 
-
-
-
 let imgGameBackGround;
 let imgStartBackGround;
 let imgBanana;
